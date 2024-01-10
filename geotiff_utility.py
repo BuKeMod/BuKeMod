@@ -1,7 +1,6 @@
 # geotiff_utils.py
 import rasterio
-from rasterio.transform import from_origin
-from rasterio.warp import transform_geom, calculate_default_transform, transform, reproject
+from rasterio.warp import transform_geom
 import sys
 
 from PIL import Image
