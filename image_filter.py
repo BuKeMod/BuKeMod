@@ -1,6 +1,9 @@
 import cv2
 import numpy as np
 import os
+
+from image_to_image import image_to_tif
+
 # from tiff import convert_png_to_tiff
 
 # # อ่านไฟล์ TIFF
@@ -32,19 +35,36 @@ import os
 #                         reference_tiff=img)
 #
 
+
 class imagefilter:
-    def __init__(self,file_path):
+    def __init__(self, file_path):
         self.file_path = file_path
         self.directory, self.filename = os.path.split(file_path)
         self.image = cv2.imread(file_path, cv2.IMREAD_UNCHANGED)
 
-    def bright_image(self,scale=1):
+    def get_directory(self):
+        return self.directory
+
+    def get_filename(self):
+        return self.filename
+
+    def get_image(self):
+        return self.image
+
+    def bright_image(self, scale=1):
         image_float = self.image.astype(np.float64)
         self.image = np.clip(image_float * scale, 0, 255).astype(np.uint8)
 
     def imageshow(self):
-        cv2.imshow(f'{self.filename}',self.image)
+        cv2.imshow(f'{self.filename}', self.image)
         cv2.waitKey(6000)
         cv2.destroyAllWindows()
 
+    def save_image(self, output_path='output'):
+        params = [cv2.IMWRITE_TIFF_COMPRESSION, 1,cv2.IMWRITE_TIFF_RESUNIT, 9, cv2.IMWRITE_TIFF_XDPI, 300, cv2.IMWRITE_TIFF_YDPI, 300]
+        # cv2.imwrite(f'{output_path}/{self.filename}', self.image,params )
+        cv2.imwrite(f'output/1.tif', self.image,params)
 
+    def save_image_tif(self, output_path='output'):
+        image_to_tif(image=self.image, source=self.file_path,
+                     output_path=output_path, output_name=self.filename)

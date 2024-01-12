@@ -6,8 +6,9 @@ import sys
 from PIL import Image
 
 class processimagetif:
-    def __init__(self,file_path):
-        if self.is_tiff_file(file_path):
+    def __init__(self,file_path,skip=False):
+        print(skip)
+        if skip or self.is_tiff_file(file_path):
             self.file_path = file_path
             self.image = rasterio.open(file_path)
         else:
@@ -92,6 +93,7 @@ class processimagetif:
     #     """Create a new GeoTIFF file."""
     #     with rasterio.open(output_path, 'w', driver=driver, count=1, dtype=data.dtype, crs=crs, transform=transform) as dst:
     #         dst.write(data, 1)
+
 
 
     def calculate_rectangle_coordinates_latlng_tif(self):
