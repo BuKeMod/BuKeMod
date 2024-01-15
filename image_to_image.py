@@ -93,7 +93,6 @@ def image_to_tif(
             elif image.ndim == 3:
                 for i in range(image.shape[2]):
                     dst.write(image[:, :, i], i + 1)
-
-        return f'{output_name}.tif'
+            return f'{output_name}.tif'
 
 
