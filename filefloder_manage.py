@@ -9,12 +9,12 @@ def create_floder(output_path='fiteroutput'):
         # ถ้าไม่มี, ให้สร้างโฟลเดอร์
         try:
             os.makedirs(output_path)
-        except Exception as e: print(e)
+        except Exception as e: print('create_floder ',e)
 #delete folder
 def delete_floder(output_path='fiteroutput'):
     try:
         os.rmdir(output_path)
-    except Exception as e: print(e)
+    except Exception as e: print('delete_floder ',e)
 
 
 #floder to zip
@@ -25,4 +25,4 @@ def floder_to_zip(output_path='fiteroutput',zipname='output_zip'):
             for file in files:
                 zipf.write(os.path.join(root, file))
         zipf.close()
-    except Exception as e: print(e)
+    except Exception as e: print('floder_to_zip ',e)

@@ -8,7 +8,7 @@ def image_to_tif(
 
     try:
         image = cv2.imread(image)
-    except Exception as e: print(e)
+    except Exception as e: print('image_to_tif imread ',e)
 
     # with rasterio.open(image, 'r') as src:
     #     # อ่านข้อมูล
