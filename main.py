@@ -64,7 +64,7 @@ try:
         "min_mask_region_area": 100,
     }
 
-    mask = "segment.tif"
+    mask = "segment_mask.tif"
     sam.generate(
         image, mask, batch=True, foreground=True, erosion_kernel=(3, 3), mask_multiplier=255,
         # sam_kwargs=sam_kwargs
