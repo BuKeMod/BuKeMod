@@ -8,8 +8,8 @@ def image_to_tif(
 
     try:
         image = cv2.imread(image)
-    except:
-        pass
+    except Exception as e: print(e)
+
     # with rasterio.open(image, 'r') as src:
     #     # อ่านข้อมูล
     #     array = src.read()
@@ -45,7 +45,7 @@ def image_to_tif(
         print('dtype',dtype)
 
         print('data.ndim',data.ndim)
-
+        print(data)
         # Define the GeoTIFF metadata
         if data.ndim == 2:
             metadata = {
@@ -83,7 +83,7 @@ def image_to_tif(
             raise ValueError("Array must be 2D or 3D.")
 
         # Create a new GeoTIFF file and write the array to it
-        with rasterio.open(f'{output_path}/{output_name}.png', "w", **metadata) as dst:
+        with rasterio.open(f'{output_path}/{output_name}.tif', "w", **metadata) as dst:
             # dst.write(data)
             # if data.ndim == 2:
             #   dst.write(data, 1)
@@ -97,6 +97,4 @@ def image_to_tif(
                     dst.write(image[:, :, i], i + 1)
 
 
-if __name__ == '__main__':
 
-    image_to_tif('img/brightened_imagePNG.png','img/Image.tif')

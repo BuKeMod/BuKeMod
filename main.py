@@ -2,25 +2,28 @@ from geotiff_utility import processimagetif
 from image_filter import imagefilter
 from image_to_image import image_to_tif
 
-pro = processimagetif('img/Task-of-2023-12-19T112104744Z-orthophoto.tif',True)
+# pro = processimagetif('output/1.tif',True)
 # pro1 = processimagetif('img/brightened_imagePNG.png',True)
 # pro2 = processimagetif('img/brightened_imageTIF.tif',True)
 
 
 
-print(pro.get_geotiff_metadata())
+# print(pro.get_geotiff_metadata())
 # print(pro1.get_geotiff_crs_pixel())
 # print(pro2.get_geotiff_crs_pixel())
 
 
 
 fiter = imagefilter('img/Task-of-2023-12-19T112104744Z-orthophoto.tif')
+# fiter = imagefilter('img/brightened_imageTIF.tif')
 
 fiter.bright_image(1.2)
 print(fiter.get_filename())
-fiter.save_image()
-# fiter.save_image_tif()
-fiter.imageshow()
+fiter.get_num_bands()
+fiter.save_image(quality=1)
+fiter.save_image_tif(quality=1)
+
+# fiter.imageshow()
 
 
 #
