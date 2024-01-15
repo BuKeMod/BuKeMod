@@ -14,7 +14,7 @@ from filefloder_manage import create_floder ,delete_floder
 
 
 
-fiter = imagefilter('img/Task-of-2023-12-19T112104744Z-orthophoto.tif')
+fiter = imagefilter('/content/Image.tif')
 # fiter = imagefilter('img/brightened_imageTIF.tif')
 
 fiter.bright_image(1.2)
