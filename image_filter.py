@@ -84,7 +84,7 @@ class imagefilter:
     def get_image_temp(self,output_path='temp',quality=100):
         from filefloder_manage import delete_floder
         try:
-            return  self.save_image_tif(self,output_path,quality)
+            return  self.save_image_tif(output_path,quality)
         finally:
             delete_floder(output_path)
 
