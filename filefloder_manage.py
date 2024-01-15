@@ -1,9 +1,9 @@
 import os
 import zipfile
 import shutil
+
+
 # create folder
-
-
 def create_floder(output_path='fiteroutput'):
 
     # ตรวจสอบว่าโฟลเดอร์มีอยู่หรือไม่
@@ -13,9 +13,9 @@ def create_floder(output_path='fiteroutput'):
             os.makedirs(output_path)
         except Exception as e:
             print('create_floder ', e)
+
+
 # delete folder
-
-
 def delete_floder(output_path='fiteroutput'):
     try:
         try:
