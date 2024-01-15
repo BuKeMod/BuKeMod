@@ -82,12 +82,10 @@ class imagefilter:
         return cv2.imdecode(jpeg_image, cv2.IMREAD_UNCHANGED)
 
     def get_image_temp(self,output_path='temp',quality=100):
-        try:
-            create_floder(output_path)
-            jpeg_image = cv2.imencode('.jpg', self.image, [cv2.IMWRITE_JPEG_QUALITY, quality])[1]
-            decoded_image = cv2.imdecode(jpeg_image, cv2.IMREAD_UNCHANGED)
-            name = image_to_tif(image=decoded_image, source=self.file_path,
-                         output_path=output_path, output_name=self.filename)
-            return name
-        finally:
-            delete_floder(output_path=output_path)
+
+        create_floder(output_path)
+        jpeg_image = cv2.imencode('.jpg', self.image, [cv2.IMWRITE_JPEG_QUALITY, quality])[1]
+        decoded_image = cv2.imdecode(jpeg_image, cv2.IMREAD_UNCHANGED)
+        name = image_to_tif(image=decoded_image, source=self.file_path,
+                            output_path=output_path, output_name=self.filename)
+        return name
