@@ -20,10 +20,10 @@ fiter = imagefilter('img/Task-of-2023-12-19T112104744Z-orthophoto.tif')
 fiter.bright_image(1.2)
 print(fiter.get_filename())
 fiter.get_num_bands()
-fiter.save_image(quality=1)
-fiter.save_image_tif(quality=1)
+fiter.save_image(quality=100)
+fiter.save_image_tif(quality=100)
 
-image = fiter.get_image(quality=1)
+image = fiter.get_image(quality=100)
 # fiter.imageshow()
 
 try:
