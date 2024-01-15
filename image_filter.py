@@ -76,3 +76,8 @@ class imagefilter:
         decoded_image = cv2.imdecode(jpeg_image, cv2.IMREAD_UNCHANGED)
         image_to_tif(image=decoded_image, source=self.file_path,
                      output_path=output_path, output_name=self.filename)
+
+    def get_image(self,quality=80):
+        jpeg_image = cv2.imencode('.jpg', self.image, [cv2.IMWRITE_JPEG_QUALITY, quality])[1]
+        return cv2.imdecode(jpeg_image, cv2.IMREAD_UNCHANGED)
+
