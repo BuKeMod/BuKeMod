@@ -77,7 +77,14 @@ class imagefilter:
         image_to_tif(image=decoded_image, source=self.file_path,
                      output_path=output_path, output_name=self.filename)
 
-    def get_image(self,quality=80):
+    def get_image(self,quality=100):
         jpeg_image = cv2.imencode('.jpg', self.image, [cv2.IMWRITE_JPEG_QUALITY, quality])[1]
         return cv2.imdecode(jpeg_image, cv2.IMREAD_UNCHANGED)
+
+    def get_image_temp(self,output_path='temp',quality=100):
+        from filefloder_manage import delete_floder
+        try:
+            return  self.save_image_tif(self,output_path,quality)
+        finally:
+            delete_floder(output_path)
 

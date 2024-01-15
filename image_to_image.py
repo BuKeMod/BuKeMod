@@ -94,5 +94,6 @@ def image_to_tif(
                 for i in range(image.shape[2]):
                     dst.write(image[:, :, i], i + 1)
 
+        return f'{output_name}.tif'
 
 

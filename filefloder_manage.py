@@ -1,6 +1,6 @@
 import os
 import zipfile
-
+import shutil
 # create folder
 def create_floder(output_path='fiteroutput'):
 
@@ -13,7 +13,12 @@ def create_floder(output_path='fiteroutput'):
 #delete folder
 def delete_floder(output_path='fiteroutput'):
     try:
-        os.rmdir(output_path)
+        try:
+
+            os.rmdir(output_path)
+        except:
+
+            shutil.rmtree(output_path)
     except Exception as e: print('delete_floder ',e)
 
 
