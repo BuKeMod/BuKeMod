@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 import os
-from filefloder_manage import create_floder , floder_to_zip
+from filefloder_manage import create_floder ,delete_floder, floder_to_zip
 from image_to_image import image_to_tif
 
 # from tiff import convert_png_to_tiff
@@ -82,9 +82,12 @@ class imagefilter:
         return cv2.imdecode(jpeg_image, cv2.IMREAD_UNCHANGED)
 
     def get_image_temp(self,output_path='temp',quality=100):
-        from filefloder_manage import delete_floder
         try:
-            return  self.save_image_tif(output_path=output_path,quality=quality)
+            create_floder(output_path)
+            jpeg_image = cv2.imencode('.jpg', self.image, [cv2.IMWRITE_JPEG_QUALITY, quality])[1]
+            decoded_image = cv2.imdecode(jpeg_image, cv2.IMREAD_UNCHANGED)
+            name = image_to_tif(image=decoded_image, source=self.file_path,
+                         output_path=output_path, output_name=self.filename)
+            return name
         finally:
-            delete_floder(output_path)
-
+            delete_floder(output_path=output_path)
