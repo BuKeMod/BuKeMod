@@ -64,7 +64,7 @@ class imagefilter:
         cv2.waitKey(6000)
         cv2.destroyAllWindows()
 
-    def save_image(self, output_path='fitleroutput_jpg',quality=80):
+    def save_image(self, output_path='filteroutput_jpg',quality=80):
         create_floder(output_path)
         params = [cv2.IMWRITE_JPEG_QUALITY, quality]
         cv2.imwrite(f'{output_path}/{self.filename}.jpg', self.image,params)
