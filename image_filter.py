@@ -64,13 +64,13 @@ class imagefilter:
         cv2.waitKey(6000)
         cv2.destroyAllWindows()
 
-    def save_image(self, output_path='filteroutput_jpg',quality=80):
+    def save_image(self, output_path='filteroutput_jpg',quality=100):
         create_floder(output_path)
         params = [cv2.IMWRITE_JPEG_QUALITY, quality]
         cv2.imwrite(f'{output_path}/{self.filename}.jpg', self.image,params)
 
 
-    def save_image_tif(self, output_path='filteroutput_tif',quality=80):
+    def save_image_tif(self, output_path='filteroutput_tif',quality=100):
         create_floder(output_path)
         jpeg_image = cv2.imencode('.jpg', self.image, [cv2.IMWRITE_JPEG_QUALITY, quality])[1]
         decoded_image = cv2.imdecode(jpeg_image, cv2.IMREAD_UNCHANGED)
