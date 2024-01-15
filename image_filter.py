@@ -65,6 +65,12 @@ class imagefilter:
         cv2.waitKey(6000)
         cv2.destroyAllWindows()
 
+    def _encode_image(self, image, quality=100):
+        return cv2.imencode('.jpg', image, [cv2.IMWRITE_JPEG_QUALITY, quality])[1]
+
+    def _decode_image(self, encoded_image):
+        return cv2.imdecode(encoded_image, cv2.IMREAD_UNCHANGED)
+
     def save_image(self, output_path='filteroutput_jpg', quality=100):
         create_floder(output_path)
         params = [cv2.IMWRITE_JPEG_QUALITY, quality]
@@ -72,23 +78,21 @@ class imagefilter:
 
     def save_image_tif(self, output_path='filteroutput_tif', quality=100):
         create_floder(output_path)
-        jpeg_image = cv2.imencode(
-            '.jpg', self.image, [cv2.IMWRITE_JPEG_QUALITY, quality])[1]
-        decoded_image = cv2.imdecode(jpeg_image, cv2.IMREAD_UNCHANGED)
+        jpeg_image = self._encode_image(self.image, quality)
+        decoded_image = self._decode_image(jpeg_image)
         image_to_tif(image=decoded_image, source=self.file_path,
                      output_path=output_path, output_name=self.filename)
 
     def get_image(self, quality=100):
-        jpeg_image = cv2.imencode(
-            '.jpg', self.image, [cv2.IMWRITE_JPEG_QUALITY, quality])[1]
-        return cv2.imdecode(jpeg_image, cv2.IMREAD_UNCHANGED)
+        jpeg_image = self._encode_image(self.image, quality)
+        decoded_image = self._decode_image(jpeg_image)
+        return decoded_image
 
     def get_image_temp(self, output_path='temp', quality=100):
 
         create_floder(output_path)
-        jpeg_image = cv2.imencode(
-            '.jpg', self.image, [cv2.IMWRITE_JPEG_QUALITY, quality])[1]
-        decoded_image = cv2.imdecode(jpeg_image, cv2.IMREAD_UNCHANGED)
-        name = image_to_tif(image=decoded_image, source=self.file_path,
-                            output_path=output_path, output_name=self.filename)
-        return name
+        jpeg_image = self._encode_image(self.image, quality)
+        decoded_image = self._decode_image(jpeg_image)
+        imagepath_temp = image_to_tif(image=decoded_image, source=self.file_path,
+                                      output_path=output_path, output_name=self.filename)
+        return imagepath_temp
