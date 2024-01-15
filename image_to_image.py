@@ -2,13 +2,15 @@ import cv2
 import rasterio
 import numpy as np
 
+
 def image_to_tif(
-    image, source,output_path,output_name, dtype=None, compress="deflate"
+    image, source, output_path, output_name, dtype=None, compress="deflate"
 ):
 
     try:
         image = cv2.imread(image)
-    except Exception as e: print('image_to_tif imread ',e)
+    except Exception as e:
+        print('image_to_tif imread ', e)
 
     # with rasterio.open(image, 'r') as src:
     #     # อ่านข้อมูล
@@ -26,24 +28,24 @@ def image_to_tif(
     max_value = np.max(image)
 
     if dtype is None:
-            # Determine the best dtype for the array
+        # Determine the best dtype for the array
         if min_value >= 0 and max_value <= 1:
-                dtype = np.float32
+            dtype = np.float32
         elif min_value >= 0 and max_value <= 255:
-                dtype = np.uint8
+            dtype = np.uint8
         elif min_value >= -128 and max_value <= 127:
-                dtype = np.int8
+            dtype = np.int8
         elif min_value >= 0 and max_value <= 65535:
-                dtype = np.uint16
+            dtype = np.uint16
         elif min_value >= -32768 and max_value <= 32767:
-                dtype = np.int16
+            dtype = np.int16
         else:
-                dtype = np.float64
+            dtype = np.float64
 
         # Convert the array to the best dtype
         data = image.astype(dtype)
-        print('dtype',dtype)
-        print('data.ndim',data.ndim)
+        print('dtype', dtype)
+        print('data.ndim', data.ndim)
         # Define the GeoTIFF metadata
         if data.ndim == 2:
             metadata = {
@@ -94,5 +96,3 @@ def image_to_tif(
                 for i in range(image.shape[2]):
                     dst.write(image[:, :, i], i + 1)
             return f'{output_path}/{output_name}.tif'
-
-

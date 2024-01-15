@@ -5,17 +5,18 @@ import sys
 
 from PIL import Image
 
+
 class processimagetif:
-    def __init__(self,file_path,skip=False):
+    def __init__(self, file_path, skip=False):
         print(skip)
         if skip or self.is_tiff_file(file_path):
             self.file_path = file_path
             self.image = rasterio.open(file_path)
         else:
-            raise ValueError("Invalid file format. Only TIFF files are supported.")
+            raise ValueError(
+                "Invalid file format. Only TIFF files are supported.")
 
-
-    def is_tiff_file(self,file_path):
+    def is_tiff_file(self, file_path):
         try:
             # เปิดไฟล์รูปภาพ
             image = Image.open(file_path)
@@ -29,7 +30,6 @@ class processimagetif:
             print(f"Error: {e}")
             return False
 
-
     def get_geotiff_metadata(self):
         """Get metadata information from a GeoTIFF dataset."""
         return self.image.meta
@@ -38,18 +38,15 @@ class processimagetif:
         transform = self.get_geotiff_metadata()
         return transform['transform']
 
-
     def get_geotiff_crs(self):
         """Get CRS (Coordinate Reference System) from a GeoTIFF dataset."""
         return self.image.crs
-
 
     def get_geotiff_crs_pixel(self):
         return {
             'width': self.image.width,
             'height': self.image.height
         }
-
 
     def _reproject_coordinates(self, x_pixel, y_pixel, target_crs='EPSG:4326'):
         """Reproject pixel coordinates to a target CRS."""
@@ -74,7 +71,8 @@ class processimagetif:
         """Transform pixel coordinates to latitude and longitude."""
         lon, lat = self._transform_pixel_to_geo(self, x_pixel, y_pixel)
         print(lon, lat)
-        lon_convert_EPSG4326, lat_convert_EPSG4326 = self._reproject_coordinates(self, x_pixel, y_pixel)
+        lon_convert_EPSG4326, lat_convert_EPSG4326 = self._reproject_coordinates(
+            self, x_pixel, y_pixel)
         return {
             'latitude': lat,
             'longitude': lon,
@@ -83,18 +81,14 @@ class processimagetif:
 
         }
 
-
     def get_raster_data(self, band=1):
         """Get raster data from a specific band of a GeoTIFF dataset."""
         return self.image.read(band)
-
 
     # def create_geotiff(output_path, data, transform, crs, driver='GTiff'):
     #     """Create a new GeoTIFF file."""
     #     with rasterio.open(output_path, 'w', driver=driver, count=1, dtype=data.dtype, crs=crs, transform=transform) as dst:
     #         dst.write(data, 1)
-
-
 
     def calculate_rectangle_coordinates_latlng_tif(self):
         # Open the TIFF file
@@ -141,8 +135,3 @@ class processimagetif:
             "Coordinates": f"Coordinates: lon_min={top_left_lng:.5f}, lat_min={top_left_lat:.5f}, lon_max={bottom_right_lng:.5f}, lat_max={bottom_right_lat:.5f}",
             "Raw_Coordinates": f"{top_left_lng:.4f},{top_left_lat:.4f},{bottom_right_lng:.4f},{bottom_right_lat:.4f}"
         }
-
-
-
-
-

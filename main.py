@@ -1,17 +1,15 @@
 from geotiff_utility import processimagetif
 from image_filter import imagefilter
-from filefloder_manage import create_floder ,delete_floder
+from filefloder_manage import create_floder, delete_floder
 
 # pro = processimagetif('output/1.tif',True)
 # pro1 = processimagetif('img/brightened_imagePNG.png',True)
 # pro2 = processimagetif('img/brightened_imageTIF.tif',True)
 
 
-
 # print(pro.get_geotiff_metadata())
 # print(pro1.get_geotiff_crs_pixel())
 # print(pro2.get_geotiff_crs_pixel())
-
 
 
 fiter = imagefilter('/content/Image.tif')
@@ -41,9 +39,8 @@ try:
         box_color='red',
         title=f'Automatic Segmentation of {text_prompt}',
         blend=True,
-        output= f'detection_boxs.tif'
+        output=f'detection_boxs.tif'
     )
-
 
     # from samgeo import SamGeo
     #
@@ -69,4 +66,5 @@ try:
     # )
     #
     # sam.show_masks(cmap="binary_r")
-except Exception as e : print(e)
+except Exception as e:
+    print(e)

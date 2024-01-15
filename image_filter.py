@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 import os
-from filefloder_manage import create_floder ,delete_floder, floder_to_zip
+from filefloder_manage import create_floder, delete_floder, floder_to_zip
 from image_to_image import image_to_tif
 
 # from tiff import convert_png_to_tiff
@@ -50,6 +50,7 @@ class imagefilter:
 
     def get_image(self):
         return self.image
+
     def get_num_bands(self):
         num_bands = self.image.shape[2]
         print(f'The image has {num_bands} bands.')
@@ -64,27 +65,29 @@ class imagefilter:
         cv2.waitKey(6000)
         cv2.destroyAllWindows()
 
-    def save_image(self, output_path='filteroutput_jpg',quality=100):
+    def save_image(self, output_path='filteroutput_jpg', quality=100):
         create_floder(output_path)
         params = [cv2.IMWRITE_JPEG_QUALITY, quality]
-        cv2.imwrite(f'{output_path}/{self.filename}.jpg', self.image,params)
+        cv2.imwrite(f'{output_path}/{self.filename}.jpg', self.image, params)
 
-
-    def save_image_tif(self, output_path='filteroutput_tif',quality=100):
+    def save_image_tif(self, output_path='filteroutput_tif', quality=100):
         create_floder(output_path)
-        jpeg_image = cv2.imencode('.jpg', self.image, [cv2.IMWRITE_JPEG_QUALITY, quality])[1]
+        jpeg_image = cv2.imencode(
+            '.jpg', self.image, [cv2.IMWRITE_JPEG_QUALITY, quality])[1]
         decoded_image = cv2.imdecode(jpeg_image, cv2.IMREAD_UNCHANGED)
         image_to_tif(image=decoded_image, source=self.file_path,
                      output_path=output_path, output_name=self.filename)
 
-    def get_image(self,quality=100):
-        jpeg_image = cv2.imencode('.jpg', self.image, [cv2.IMWRITE_JPEG_QUALITY, quality])[1]
+    def get_image(self, quality=100):
+        jpeg_image = cv2.imencode(
+            '.jpg', self.image, [cv2.IMWRITE_JPEG_QUALITY, quality])[1]
         return cv2.imdecode(jpeg_image, cv2.IMREAD_UNCHANGED)
 
-    def get_image_temp(self,output_path='temp',quality=100):
+    def get_image_temp(self, output_path='temp', quality=100):
 
         create_floder(output_path)
-        jpeg_image = cv2.imencode('.jpg', self.image, [cv2.IMWRITE_JPEG_QUALITY, quality])[1]
+        jpeg_image = cv2.imencode(
+            '.jpg', self.image, [cv2.IMWRITE_JPEG_QUALITY, quality])[1]
         decoded_image = cv2.imdecode(jpeg_image, cv2.IMREAD_UNCHANGED)
         name = image_to_tif(image=decoded_image, source=self.file_path,
                             output_path=output_path, output_name=self.filename)
