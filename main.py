@@ -32,8 +32,8 @@ try:
     sam = LangSAM()
     text_prompt = "fram"
     create_floder('temp')
-
-    sam.predict(fiter, text_prompt, box_threshold=0.2, text_threshold=0.2)
+    fiter.save_image_tif(output_path='temp',quality=100)
+    sam.predict(image, text_prompt, box_threshold=0.2, text_threshold=0.2)
     delete_floder('temp')
     sam.show_anns(
         cmap='Accent_r',
