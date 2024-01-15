@@ -43,9 +43,7 @@ def image_to_tif(
         # Convert the array to the best dtype
         data = image.astype(dtype)
         print('dtype',dtype)
-
         print('data.ndim',data.ndim)
-        print(data)
         # Define the GeoTIFF metadata
         if data.ndim == 2:
             metadata = {
