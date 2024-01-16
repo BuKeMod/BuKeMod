@@ -12,13 +12,27 @@ def segment(image, output_path='vector_output', filename=None):
     )
 
     sam_kwargs = {
-        "points_per_side": 128,
-        "pred_iou_thresh": 0.3,
+        "points_per_side": 32,
+        "pred_iou_thresh": 0.88,
         "stability_score_thresh": 0.95,
         "crop_n_layers": 1,
         "crop_n_points_downscale_factor": 1,
         "min_mask_region_area": 100,
     }
+
+                # points_per_side: Optional[int] = 32,
+                # points_per_batch: int = 64,
+                # pred_iou_thresh: float = 0.88,
+                # stability_score_thresh: float = 0.95,
+                # stability_score_offset: float = 1.0,
+                # box_nms_thresh: float = 0.7,
+                # crop_n_layers: int = 0,
+                # crop_nms_thresh: float = 0.7,
+                # crop_overlap_ratio: float = 512 / 1500,
+                # crop_n_points_downscale_factor: int = 1,
+                # point_grids: Optional[List[np.ndarray]] = None,
+                # min_mask_region_area: int = 0,
+                # output_mode: str = "binary_mask",
 
 
     filename = create_folder_from_imageformat(image,output_path,filename)
