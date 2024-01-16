@@ -42,7 +42,7 @@ def segment(image, output_path='vector_output', filename=None):
     shapefile = f'{output_path}/{filename}/segment_shapefile.shp'
 
     sam.generate(
-        image, mask, batch=True, foreground=True, erosion_kernel=(3, 3), mask_multiplier=255,
+        image, mask, batch=False, foreground=True, erosion_kernel=(3, 3), mask_multiplier=255,
         # sam_kwargs=sam_kwargs
     )
 
