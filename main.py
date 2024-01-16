@@ -17,11 +17,11 @@ def multi_image(image_path,output_path='vector_output',brightscale=1):
 
 
         image_filter.bright_image(brightscale)
-        image = image_filter.save_image_tif(output_path=output_path, quality=100)
+        image = image_filter.get_image_temp(output_path=output_path, quality=100)
         # image = image_filter.get_image(quality=100)
   
      
-        segment(image,output_path,folder_infilename)
+        segment(image,output_path)
        
 if __name__ == '__main__':
     multi_image(image_path='SAKI ASHIZAWA')

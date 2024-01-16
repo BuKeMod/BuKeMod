@@ -1,7 +1,7 @@
 import cv2
 import rasterio
 import numpy as np
-
+from filefolder_manage import create_folder
 
 def image_to_tif(
     image, source, output_path, output_name, dtype=None, compress="deflate"
@@ -81,9 +81,10 @@ def image_to_tif(
             metadata["compress"] = compress
         else:
             raise ValueError("Array must be 2D or 3D.")
-
+        output_path_final = f'{output_path}/{output_name}'
+        create_folder(output_path_final)
         # Create a new GeoTIFF file and write the array to it
-        with rasterio.open(f'{output_path}/{output_name}.tif', "w", **metadata) as dst:
+        with rasterio.open(f'{output_path_final}/{output_name}.tif', "w", **metadata) as dst:
             # dst.write(data)
             # if data.ndim == 2:
             #   dst.write(data, 1)
