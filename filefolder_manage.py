@@ -11,13 +11,13 @@ def getfilename(file_path):
 
 def setimagepath(folder_path):
     try:
-        extension = '.jpg'
+        extension = '.tif'
         for filename in os.listdir(folder_path):
             if filename.endswith(extension):
                 image_paths = glob.glob(f"{folder_path}/*{extension}")
                 return image_paths
             else:
-                print("This is not a tif file")
+                print(f"This is not a {extension} file")
     except Exception as e:
         print('setimagepath ',e)
 
