@@ -31,10 +31,20 @@ class imagefilter:
         image_float = self.image.astype(np.float64)
         self.image = np.clip(image_float * scale, 0, 255).astype(np.uint8)
 
+    def Blur_image(self, scalepixelx=3, scalepixely=3,deviation=1):
+        self.image = cv2.GaussianBlur(self.image, (scalepixelx,scalepixely ), deviation )
+
+    def hsv_image(self):
+        self.image = cv2.cvtColor(self.image, cv2.COLOR_RGB2HSV)
+
+
+
     def imageshow(self):
         cv2.imshow(f'{self.filename}', self.image)
         cv2.waitKey(6000)
         cv2.destroyAllWindows()
+
+
 
     def _encode_image(self, image, quality=100):
         return cv2.imencode('.jpg', image, [cv2.IMWRITE_JPEG_QUALITY, quality])[1]
