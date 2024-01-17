@@ -1,12 +1,12 @@
 from image_filter import imagefilter
 from filefolder_manage import setimagepath
+from sam_segment import segment
 
+from argumentParser import create_parser    
 
+def multi_image(image_path,output_path='vector_output',brightscale=1,batch=False):
 
-
-def multi_image(image_path,output_path='vector_output',brightscale=1):
-    from filefolder_manage import setimagepath
-    from sam_segment import segment
+  
 
     image_paths = setimagepath(image_path)
     image_filters = [imagefilter(image_path) for image_path in image_paths]
@@ -21,7 +21,8 @@ def multi_image(image_path,output_path='vector_output',brightscale=1):
 
   
      
-        segment(image,output_path)
+        segment(image,output_path,batch)
        
 if __name__ == '__main__':
-    multi_image(image_path='IMAGEPATH',brightscale=1.2)
+    args = create_parser()
+    multi_image(image_path=args.image_path,brightscale=1.2,batch=args.batch)

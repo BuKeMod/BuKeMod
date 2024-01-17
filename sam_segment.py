@@ -4,7 +4,7 @@ import numpy
 from filefolder_manage import getfilename, create_folder
 import os
 
-def segment(image, output_path='vector_output', filename=None):
+def segment(image, output_path='vector_output', filename=None,batch=False):
     sam = SamGeo(
         model_type="vit_h",
         # checkpoint="/content/drive/MyDrive/model/epoch-000090-f10.98-ckpt.pth",
@@ -42,7 +42,7 @@ def segment(image, output_path='vector_output', filename=None):
     shapefile = f'{output_path}/{filename}/segment_shapefile.shp'
 
     sam.generate(
-        image, mask, batch=False, foreground=True, erosion_kernel=(3, 3), mask_multiplier=255,
+        image, mask, batch, foreground=True, erosion_kernel=(3, 3), mask_multiplier=255,
         # sam_kwargs=sam_kwargs
     )
 
