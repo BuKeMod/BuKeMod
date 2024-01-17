@@ -4,7 +4,7 @@ from sam_segment import segment
 
 from argumentParser import create_parser    
 
-def multi_image(image_path,output_path='vector_output',brightscale=1,batch=False):
+def multi_image(image_path,output_path='vector_output',brightscale=1,batch=False,model_type='vit_h'):
 
   
 
@@ -21,8 +21,9 @@ def multi_image(image_path,output_path='vector_output',brightscale=1,batch=False
 
   
      
-        segment(image,output_path,batch)
+        segment(image,output_path,batch=batch,model_type=model_type)
        
 if __name__ == '__main__':
     args = create_parser()
-    multi_image(image_path=args.image_path,brightscale=1.2,batch=args.batch)
+    model_type = args.model_type
+    multi_image(image_path=args.image_path,brightscale=1.2,batch=args.batch,model_type=model_type)

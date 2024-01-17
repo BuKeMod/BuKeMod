@@ -4,9 +4,9 @@ import numpy
 from filefolder_manage import getfilename, create_folder
 import os
 
-def segment(image, output_path='vector_output', filename=None,batch=False):
+def segment(image, output_path='vector_output', filename=None,batch=False,model_type='vit_h'):
     sam = SamGeo(
-        model_type="vit_h",
+        model_type=model_type,
         # checkpoint="/content/drive/MyDrive/model/epoch-000090-f10.98-ckpt.pth",
         sam_kwargs=None,
     )
