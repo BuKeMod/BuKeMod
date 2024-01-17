@@ -20,10 +20,11 @@ def multi_image(image_path,output_path='vector_output',brightscale=1,batch=False
         image = image_filter.get_image_temp(output_path=output_path, quality=100)
 
   
-     
+        print(batch)
         segment(image,output_path,batch=batch,model_type=model_type)
        
 if __name__ == '__main__':
     args = create_parser()
     model_type = args.model_type
+    print(args.batch)
     multi_image(image_path=args.image_path,brightscale=1.2,batch=args.batch,model_type=model_type)
