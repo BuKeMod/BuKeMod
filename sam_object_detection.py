@@ -5,17 +5,12 @@ import os
 
 
 
-def detection(image,output_path='detection_output' ,filename=None,text_prompt='fram',box_threshold=0.2, text_threshold=0.2,model_type='vit_h'):
+def detection(image,output_path='detection_output',text_prompt='fram',box_threshold=0.2, text_threshold=0.2):
 
     sam = LangSAM()
-    text_prompt = text_prompt
-  
 
 
-
-    print(image)
-
-    filename = create_folder_from_imageformat(image,output_path,filename)
+    filename = create_folder_from_imageformat(image,output_path)
 
 
     sam.predict(image, text_prompt, box_threshold, text_threshold)
@@ -27,13 +22,13 @@ def detection(image,output_path='detection_output' ,filename=None,text_prompt='f
         box_color='red',
         title=f'Automatic Segmentation of {text_prompt}',
         blend=True,
-        output=f'{output_path}/{filename}_detection_boxs.tif'
+        output=f'{output_path}/{filename}/{filename}_detection_boxs.tif'
     )
 
-    sam.raster_to_vector(f'{output_path}/{filename}_detection_boxs.tif', f'{output_path}/{filename}.shp')
+    sam.raster_to_vector(f'{output_path}/{filename}/{filename}_detection_boxs.tif', f'{output_path}/{filename}.shp')
 
 
-def create_folder_from_imageformat(image,output_path,filename):
+def create_folder_from_imageformat(image,output_path,filename=None):
     if type(image) == numpy.ndarray and filename != None:
         create_folder(f'{output_path}/{filename}')
 

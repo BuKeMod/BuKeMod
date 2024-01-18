@@ -28,15 +28,15 @@ def multi_image_segment(image_path,output_path='segment_output',brightscale=1,ba
         segment(image,output_path,batch=batch,model_type=model_type)
 
 
-def single_image_detection(image_path,output_path='detection_output',brightscale=1,box_threshold=0.2,text_threshold=0.2,model_type='vit_h'):
+def single_image_detection(image_path,output_path='detection_output',brightscale=1,text_prompt ='',box_threshold=0.2,text_threshold=0.2):
     image_filter = imagefilter(image_path)
 
     image_filter.bright_image(brightscale)
     image = image_filter.get_image_temp(output_path=output_path, quality=100)
 
-    detection(image,output_path,box_threshold,text_threshold,model_type=model_type)
+    detection(image,output_path,text_prompt, box_threshold,text_threshold)
 
-def multi_image_detection(image_path,output_path='detection_output',brightscale=1,box_threshold=0.2,text_threshold=0.2,model_type='vit_h'):
+def multi_image_detection(image_path,output_path='detection_output',brightscale=1,text_prompt ='',box_threshold=0.2,text_threshold=0.2):
 
     image_paths = setimagepath(image_path)
     image_filters = [imagefilter(image_path) for image_path in image_paths]
@@ -47,13 +47,13 @@ def multi_image_detection(image_path,output_path='detection_output',brightscale=
         image_filter.bright_image(brightscale)
         image = image_filter.get_image_temp(output_path=output_path, quality=100)
 
-        detection(image,output_path,box_threshold,text_threshold,model_type=model_type)
+        detection(image,output_path,text_prompt, box_threshold,text_threshold)
 
        
 if __name__ == '__main__':
     args = create_parser()
     model_type = args.model_type
-    
+
     # multi_image_segment(image_path=args.image_path,brightscale=1.2,batch=args.batch,model_type=model_type)
     single_image_detection(image_path=args.image_path,brightscale=1.2,box_threshold=0.2,text_threshold=0.2,model_type=model_type)
 
