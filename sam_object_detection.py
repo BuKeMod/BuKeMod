@@ -21,7 +21,7 @@ def detection(image,output_path='detection_output',text_prompt='fram',box_thresh
         cmap='Accent_r',
         box_color='red',
         title=f'Automatic Segmentation of {text_prompt}',
-        blend=True,
+        blend=False,
         output=f'{output_path}/{filename}/{filename}_detection_boxs.tif'
     )
 
