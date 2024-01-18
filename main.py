@@ -53,9 +53,9 @@ def multi_image_detection(image_path,output_path='detection_output',brightscale=
 if __name__ == '__main__':
     args = create_parser()
     model_type = args.model_type
-
+    text_prompt = 'house'
     # multi_image_segment(image_path=args.image_path,brightscale=1.2,batch=args.batch,model_type=model_type)
-    single_image_detection(image_path=args.image_path,brightscale=1.2,box_threshold=0.2,text_threshold=0.2,model_type=model_type)
+    single_image_detection(image_path=args.image_path,text_prompt=text_prompt,brightscale=1.2,box_threshold=0.2,text_threshold=0.2)
 
 
 
