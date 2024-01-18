@@ -55,3 +55,14 @@ if __name__ == '__main__':
     model_type = args.model_type
     print(args.batch)
     multi_image_segment(image_path=args.image_path,brightscale=1.2,batch=args.batch,model_type=model_type)
+
+
+
+
+
+
+
+
+
+
+#main.py
