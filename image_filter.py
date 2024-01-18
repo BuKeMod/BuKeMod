@@ -26,8 +26,10 @@ class imagefilter:
         return num_bands
 
     def bright_image(self, scale=1):
-        image_float = self.image.astype(np.float64)
-        self.image = np.clip(image_float * scale, 0, 255).astype(np.uint8)
+        # image_float = self.image.astype(np.float64)
+        # self.image = np.clip(image_float * scale, 0, 255).astype(np.uint8)
+        self.image = np.clip(self.image * scale, 0, 255)
+
 
     def Blur_image(self, scalepixelx=3, scalepixely=3,deviation=1):
         self.image = cv2.GaussianBlur(self.image, (scalepixelx,scalepixely ), deviation )
