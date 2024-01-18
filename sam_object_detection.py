@@ -27,7 +27,10 @@ def detection(image,output_path='detection_output',text_prompt='fram',box_thresh
 
     sam.raster_to_vector(f'{output_path}/{filename}/{filename}_detection_boxs.tif', f'{output_path}/{filename}/{filename}_detection_shapefile.shp')
     
-    folder_to_zip(f'{output_path}/{filename}','detection_output')
+    folder_to_zip(f'{output_path}','detection_output')
+
+
+
 
 def create_folder_from_imageformat(image,output_path,filename=None):
     if type(image) == numpy.ndarray and filename != None:
