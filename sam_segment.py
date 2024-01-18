@@ -49,7 +49,7 @@ def segment(image, output_path='segment_output', filename=None,batch=False,model
 
     sam.raster_to_vector(mask,shapefile)
 
-    folder_to_zip(f'{output_path}','segment_output')
+   
 
     # sam.show_masks(cmap="binary_r")
 

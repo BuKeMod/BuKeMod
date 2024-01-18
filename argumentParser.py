@@ -7,11 +7,11 @@ def create_parser():
 
     parser.add_argument('--image_path', type=str,
                         default='images', help='image_path')
+    parser.add_argument('--bright', type=int, default=1, help='brightscale')
     parser.add_argument('--batch', default=False, help='predict batch image')
-    # Training configuration
+  
     parser.add_argument('--model_type', type=str,
                         default='vit_h', help='model_type segment')
-
 
     parser.parse_args().batch = str_to_bool(parser.parse_args().batch)
 

@@ -1,5 +1,5 @@
 from image_filter import imagefilter
-from filefolder_manage import setimagepath
+from filefolder_manage import setimagepath, folder_to_zip
 from sam_segment import segment
 from sam_object_detection import detection
 from argumentParser import create_parser
@@ -34,6 +34,7 @@ def image_segment(image_path, output_path='segment_output', brightscale=1, batch
         segment(image, output_path, batch=batch, model_type=model_type)
         print("single image segment success")
 
+    folder_to_zip(f'{output_path}','segment_output')
 
 def image_detection(image_path, output_path='detection_output', brightscale=1, text_prompt='', box_threshold=0.2, text_threshold=0.2):
 
@@ -66,6 +67,7 @@ def image_detection(image_path, output_path='detection_output', brightscale=1, t
                 box_threshold, text_threshold)
         print("single image detection success")
 
+    folder_to_zip(f'{output_path}','segment_output')
 
 
 
