@@ -53,14 +53,14 @@ def delete_folder(output_path='fiteroutput'):
 
 # folder to zip
 def folder_to_zip(output_path='fiteroutput', zipname='output_zip'):
-    print('add output zip')
+    print('---convert to zip---')
     try:
         zipf = zipfile.ZipFile(f'{zipname}.zip', 'w', zipfile.ZIP_DEFLATED)
         for root, dirs, files in os.walk(output_path):
             for file in files:
                 zipf.write(os.path.join(root, file))
         zipf.close()
-        print('add zip success')
+        print('---convert to zip success---')
     except Exception as e:
         print('folder_to_zip ', e)
 
