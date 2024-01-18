@@ -11,13 +11,17 @@ def getfilename(file_path):
 
 def setimagepath(folder_path):
     try:
-        extension = 'jpg'
-        for filename in os.listdir(folder_path):
-            if filename.endswith(extension):
-                image_paths = glob.glob(f"{folder_path}/*{extension}")
-                return image_paths
-            else:
-                print(f"This is not a {extension} file")
+        extension = 'tif'
+        if folder_path.endswith(extension):
+            image_paths = folder_path
+            return image_paths
+        else:
+            for filename in os.listdir(folder_path):
+                if filename.endswith(extension):
+                    image_paths = glob.glob(f"{folder_path}/*{extension}")
+                    return image_paths
+                else:
+                    print(f"This is not a {extension} file")
     except Exception as e:
         print('setimagepath ',e)
 
@@ -63,5 +67,6 @@ if __name__ == '__main__':
     # create_folder()
 #     delete_folder()
 #     folder_to_zip()
+    p = setimagepath('SAKI ASHIZAWA\maxresdefault (8).jpg')
     p = setimagepath('SAKI ASHIZAWA')
     print(p)
