@@ -25,7 +25,7 @@ def detection(image,output_path='detection_output',text_prompt='fram',box_thresh
         output=f'{output_path}/{filename}/{filename}_detection_boxs.tif'
     )
 
-    sam.raster_to_vector(f'{output_path}/{filename}/{filename}_detection_boxs.tif', f'{output_path}/{filename}.shp')
+    sam.raster_to_vector(f'{output_path}/{filename}/{filename}_detection_boxs.tif', f'{output_path}/{filename}/{filename}_detection_shapefile.shp')
 
 
 def create_folder_from_imageformat(image,output_path,filename=None):
