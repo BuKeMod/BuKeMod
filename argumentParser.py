@@ -14,7 +14,7 @@ def create_parser():
                         default='vit_h', help='model_type segment')
 
     parser.parse_args().batch = str_to_bool(parser.parse_args().batch)
-
+    print(parser.parse_args())
     return parser.parse_args()
 
 

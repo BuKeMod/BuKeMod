@@ -10,7 +10,7 @@ def image_segment(image_path, output_path='segment_output', brightscale=1, batch
     image_paths = setimagepath(image_path)
 
     if isinstance(image_paths, list):
-        print("multi image segment process")
+        print("---multi image segment process---")
 
         image_filters = [imagefilter(image_path) for image_path in image_paths]
         # ให้ ImageFilter ปรับภาพแต่ละรูป
@@ -23,7 +23,7 @@ def image_segment(image_path, output_path='segment_output', brightscale=1, batch
             segment(image, output_path, batch=batch, model_type=model_type)
 
             filename = image_filter.get_filename()
-            print(f"{filename} segment success")
+            print(f"*{filename} segment success")
      
 
     else:
@@ -46,7 +46,7 @@ def image_detection(image_path, output_path='detection_output', brightscale=1, t
     image_paths = setimagepath(image_path)
 
     if isinstance(image_paths, list):
-        print("multi image detection process")
+        print("---multi image detection process---")
 
         image_filters = [imagefilter(image_path) for image_path in image_paths]
 
@@ -62,9 +62,9 @@ def image_detection(image_path, output_path='detection_output', brightscale=1, t
           
 
             filename = image_filter.get_filename()
-            print(f"{filename} detection success")
+            print(f"*{filename} detection success")
     else:
-        print("single image detection process")
+        print("---single image detection process---")
 
         image_filter = imagefilter(image_path)
         image_filter.bright_image(brightscale)
@@ -77,7 +77,7 @@ def image_detection(image_path, output_path='detection_output', brightscale=1, t
         filename = image_filter.get_filename()
         print(f"{filename} detection success")
 
-    folder_to_zip(f'{output_path}', 'segment_output')
+    folder_to_zip(f'*{output_path}', 'segment_output')
 
 
 if __name__ == '__main__':
