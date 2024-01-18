@@ -1,10 +1,10 @@
 
 from samgeo import SamGeo
 import numpy
-from filefolder_manage import getfilename, create_folder
+from filefolder_manage import create_folder
 import os
 
-def segment(image, output_path='vector_output', filename=None,batch=False,model_type='vit_h'):
+def segment(image, output_path='segment_output', filename=None,batch=False,model_type='vit_h'):
 
 
     sam_kwargs = {

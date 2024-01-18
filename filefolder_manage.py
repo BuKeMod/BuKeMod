@@ -11,7 +11,7 @@ def getfilename(file_path):
 
 def setimagepath(folder_path):
     try:
-        extension = '.tif'
+        extension = 'jpg'
         for filename in os.listdir(folder_path):
             if filename.endswith(extension):
                 image_paths = glob.glob(f"{folder_path}/*{extension}")
@@ -59,9 +59,9 @@ def folder_to_zip(output_path='fiteroutput', zipname='output_zip'):
         print('folder_to_zip ', e)
 
 
-# if __name__ == '__main__':
+if __name__ == '__main__':
     # create_folder()
 #     delete_folder()
 #     folder_to_zip()
-#     setimagepath()
-
+    p = setimagepath('SAKI ASHIZAWA')
+    print(p)
