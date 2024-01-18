@@ -34,7 +34,8 @@ def image_segment(image_path, output_path='segment_output', brightscale=1, batch
         segment(image, output_path, batch=batch, model_type=model_type)
         print("single image segment success")
 
-    folder_to_zip(f'{output_path}','segment_output')
+    folder_to_zip(f'{output_path}', 'segment_output')
+
 
 def image_detection(image_path, output_path='detection_output', brightscale=1, text_prompt='', box_threshold=0.2, text_threshold=0.2):
 
@@ -53,7 +54,7 @@ def image_detection(image_path, output_path='detection_output', brightscale=1, t
                 output_path=output_path, quality=100)
 
             detection(image, output_path, text_prompt,
-                    box_threshold, text_threshold)
+                      box_threshold, text_threshold)
             print("multi image detection success")
     else:
         print("single image detection process")
@@ -64,20 +65,19 @@ def image_detection(image_path, output_path='detection_output', brightscale=1, t
             output_path=output_path, quality=100)
 
         detection(image, output_path, text_prompt,
-                box_threshold, text_threshold)
+                  box_threshold, text_threshold)
         print("single image detection success")
 
-    folder_to_zip(f'{output_path}','segment_output')
-
+    folder_to_zip(f'{output_path}', 'segment_output')
 
 
 if __name__ == '__main__':
     args = create_parser()
     model_type = args.model_type
     text_prompt = 'house'
-    #image_segment(image_path=args.image_path,brightscale=1.2,batch=args.batch,model_type=model_type)
-    image_detection(image_path=args.image_path, text_prompt=text_prompt,
-                           brightscale=1.2, box_threshold=0.2, text_threshold=0.2)
+    image_segment(image_path=args.image_path,brightscale=1.2,batch=args.batch,model_type=model_type)
+    # image_detection(image_path=args.image_path, text_prompt=text_prompt,
+    #                 brightscale=1.2, box_threshold=0.2, text_threshold=0.2)
 
 
 # main.py
