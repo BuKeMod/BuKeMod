@@ -41,7 +41,7 @@ def segment(image, output_path='segment_output', filename=None,batch=False,model
 
     mask = f"{output_path}/{filename}/segment_mask.tif"
     shapefile = f'{output_path}/{filename}/segment_shapefile.shp'
-    print(batch)
+
     sam.generate(
         image, mask, batch=eval(batch), foreground=True, erosion_kernel=(3, 3), mask_multiplier=255,
         # sam_kwargs=sam_kwargs
