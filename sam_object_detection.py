@@ -5,10 +5,10 @@ import os
 
 
 
-def detection(image,output_path='detection_output' ,filename=None,text_prompt='fram',batch=False,model_type='vit_h'):
+def detection(image,output_path='detection_output' ,filename=None,text_prompt='fram',box_threshold=0.2, text_threshold=0.2,model_type='vit_h'):
 
     sam = LangSAM()
-    text_prompt = "fram"
+    text_prompt = text_prompt
   
 
 
@@ -18,7 +18,7 @@ def detection(image,output_path='detection_output' ,filename=None,text_prompt='f
     filename = create_folder_from_imageformat(image,output_path,filename)
 
 
-    sam.predict(image, text_prompt, box_threshold=0.2, text_threshold=0.2)
+    sam.predict(image, text_prompt, box_threshold, text_threshold)
 
 
 

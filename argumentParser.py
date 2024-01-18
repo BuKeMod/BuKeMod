@@ -19,7 +19,6 @@ def create_parser():
 
 
 def str_to_bool(s):
-    print('str_to', s)
     if s == False or s == 'False':
         return False
     elif s == True or s == 'True':
