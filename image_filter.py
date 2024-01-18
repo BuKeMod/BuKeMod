@@ -9,7 +9,7 @@ class imagefilter:
     def __init__(self, file_path):
         self.file_path = file_path
         self.directory, self.filename = os.path.split(file_path)
-        self.filename =  os.path.splitext(self.filename)[0]
+        self.filenamesplit =  os.path.splitext(self.filename)[0]
         
         self.image = cv2.imread(file_path, cv2.IMREAD_UNCHANGED)
     def get_filepath(self):
@@ -18,10 +18,8 @@ class imagefilter:
         return self.directory
 
     def get_filename(self):
-        name_without_extension = os.path.splitext(self.filename)[0]
-        # return self.filename
-        return name_without_extension
-
+        return self.filename
+    
     def get_num_bands(self):
         num_bands = self.image.shape[2]
         print(f'The image has {num_bands} bands.')
@@ -55,14 +53,14 @@ class imagefilter:
     def save_image(self, output_path='filteroutput_jpg', quality=100,extension='jpg'):
         create_folder(output_path)
         params = [cv2.IMWRITE_JPEG_QUALITY, quality]
-        cv2.imwrite(f'{output_path}/{self.filename}.{extension}', self.image, params)
+        cv2.imwrite(f'{output_path}/{self.filenamesplit}.{extension}', self.image, params)
 
     def save_image_tif(self, output_path='filteroutput_tif', quality=100):
         create_folder(output_path)
         jpeg_image = self._encode_image(self.image, quality)
         decoded_image = self._decode_image(jpeg_image)
         image_to_tif(image=decoded_image, source=self.file_path,
-                     output_path=output_path, output_name=self.filename)
+                     output_path=output_path, output_name=self.filenamesplit)
 
     def get_image(self, quality=100):
         jpeg_image = self._encode_image(self.image, quality)
@@ -75,7 +73,7 @@ class imagefilter:
         jpeg_image = self._encode_image(self.image, quality)
         decoded_image = self._decode_image(jpeg_image)
         imagepath_temp = image_to_tif(image=decoded_image, source=self.file_path,
-                                      output_path=output_path, output_name=self.filename)
+                                      output_path=output_path, output_name=self.filenamesplit)
         return imagepath_temp
 
 

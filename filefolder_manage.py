@@ -60,6 +60,7 @@ def folder_to_zip(output_path='fiteroutput', zipname='output_zip'):
             for file in files:
                 zipf.write(os.path.join(root, file))
         zipf.close()
+        print('add zip success')
     except Exception as e:
         print('folder_to_zip ', e)
 

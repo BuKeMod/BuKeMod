@@ -21,7 +21,10 @@ def image_segment(image_path, output_path='segment_output', brightscale=1, batch
                 output_path=output_path, quality=100)
 
             segment(image, output_path, batch=batch, model_type=model_type)
-            print("multi image segment success")
+
+            filename = image_filter.get_filename()
+            print(f"{filename} segment success")
+     
 
     else:
         print("single image segment process")
@@ -32,8 +35,9 @@ def image_segment(image_path, output_path='segment_output', brightscale=1, batch
             output_path=output_path, quality=100)
 
         segment(image, output_path, batch=batch, model_type=model_type)
-        print("single image segment success")
 
+        filename = image_filter.get_filename()
+        print(f"{filename} segment success")
     folder_to_zip(f'{output_path}', 'segment_output')
 
 
@@ -55,7 +59,10 @@ def image_detection(image_path, output_path='detection_output', brightscale=1, t
 
             detection(image, output_path, text_prompt,
                       box_threshold, text_threshold)
-            print("multi image detection success")
+          
+
+            filename = image_filter.get_filename()
+            print(f"{filename} detection success")
     else:
         print("single image detection process")
 
@@ -66,7 +73,9 @@ def image_detection(image_path, output_path='detection_output', brightscale=1, t
 
         detection(image, output_path, text_prompt,
                   box_threshold, text_threshold)
-        print("single image detection success")
+        
+        filename = image_filter.get_filename()
+        print(f"{filename} detection success")
 
     folder_to_zip(f'{output_path}', 'segment_output')
 

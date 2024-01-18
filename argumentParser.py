@@ -7,7 +7,7 @@ def create_parser():
 
     parser.add_argument('--image_path', type=str,
                         default='images', help='image_path')
-    parser.add_argument('--bright', type=int, default=1, help='brightscale')
+    parser.add_argument('--bright', type=float, default=1, help='brightscale')
     parser.add_argument('--batch', default=False, help='predict batch image')
   
     parser.add_argument('--model_type', type=str,
