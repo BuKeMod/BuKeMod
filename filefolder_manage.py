@@ -53,6 +53,7 @@ def delete_folder(output_path='fiteroutput'):
 
 # folder to zip
 def folder_to_zip(output_path='fiteroutput', zipname='output_zip'):
+    print('add output zip')
     try:
         zipf = zipfile.ZipFile(f'{zipname}.zip', 'w', zipfile.ZIP_DEFLATED)
         for root, dirs, files in os.walk(output_path):
@@ -63,10 +64,7 @@ def folder_to_zip(output_path='fiteroutput', zipname='output_zip'):
         print('folder_to_zip ', e)
 
 
-if __name__ == '__main__':
-    # create_folder()
-#     delete_folder()
-#     folder_to_zip()
-    p = setimagepath('SAKI ASHIZAWA\maxresdefault (8).jpg')
-    p = setimagepath('SAKI ASHIZAWA')
-    print(p)
+# if __name__ == '__main__':
+#     # create_folder()
+# #     delete_folder()
+# #     folder_to_zip()

@@ -1,7 +1,7 @@
 
 from samgeo import SamGeo
 import numpy
-from filefolder_manage import create_folder
+from filefolder_manage import create_folder,folder_to_zip
 import os
 
 def segment(image, output_path='segment_output', filename=None,batch=False,model_type='vit_h'):
@@ -49,6 +49,8 @@ def segment(image, output_path='segment_output', filename=None,batch=False,model
 
     sam.raster_to_vector(mask,shapefile)
 
+    folder_to_zip(f'{output_path}/{filename}','segment_output')
+    
     # sam.show_masks(cmap="binary_r")
 
 
