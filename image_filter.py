@@ -26,6 +26,7 @@ class imagefilter:
         return num_bands
 
     def bright_image(self, scale=1):
+        print(f'image bright scale ',{scale})
         # image_float = self.image.astype(np.float64)
         # self.image = np.clip(image_float * scale, 0, 255).astype(np.uint8)
         self.image = np.clip(self.image * scale, 0, 255)

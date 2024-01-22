@@ -1,5 +1,6 @@
 from image_filter import imagefilter
 from filefolder_manage import setimagepath, folder_to_zip
+from geotiff_utility import processimagetif
 from sam_segment import segment
 from sam_object_detection import detection
 from argumentParser import create_parser

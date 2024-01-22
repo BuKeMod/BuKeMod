@@ -2,7 +2,7 @@
 import rasterio
 from rasterio.warp import transform_geom
 import sys
-
+from samgeo import tms_to_geotiff
 from PIL import Image
 
 
@@ -69,10 +69,10 @@ class processimagetif:
         y_pixel = self.image.height // 2
 
         """Transform pixel coordinates to latitude and longitude."""
-        lon, lat = self._transform_pixel_to_geo(self, x_pixel, y_pixel)
-        print(lon, lat)
+        lon, lat = self._transform_pixel_to_geo(x_pixel, y_pixel)
+        print('pixel_coordinates_to_latlon',lon, lat)
         lon_convert_EPSG4326, lat_convert_EPSG4326 = self._reproject_coordinates(
-            self, x_pixel, y_pixel)
+             x_pixel, y_pixel)
         return {
             'latitude': lat,
             'longitude': lon,
@@ -135,3 +135,22 @@ class processimagetif:
             "Coordinates": f"Coordinates: lon_min={top_left_lng:.5f}, lat_min={top_left_lat:.5f}, lon_max={bottom_right_lng:.5f}, lat_max={bottom_right_lat:.5f}",
             "Raw_Coordinates": f"{top_left_lng:.4f},{top_left_lat:.4f},{bottom_right_lng:.4f},{bottom_right_lat:.4f}"
         }
+    
+
+    def get_image_withCoordinates(self):
+        from filefolder_manage import getfilename
+        image = getfilename(self.file_path)
+        print(image)
+        bbox = self.calculate_rectangle_coordinates_latlng_tif()
+        print(bbox)
+        # tms_to_geotiff(output=image, bbox=bbox, zoom=17, source="Satellite", overwrite=True)
+
+if __name__ == '__main__':
+    im = processimagetif('./img/Image.tif')
+    # im1 = processimagetif('./img/Task-of-2023-12-19T112104744Z-orthophoto.tif')
+    # im2 = processimagetif('./img/satellite (2).tif')
+    #
+    # print(im.get_geotiff_crs())
+    # print(im1.get_geotiff_crs())
+    # print(im2.get_geotiff_crs())
+    im.get_image_withCoordinates()
