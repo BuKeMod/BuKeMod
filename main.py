@@ -84,11 +84,16 @@ def image_detection(image_path, output_path='detection_output', brightscale=1, t
 
 
 
-def image_segment_satellite_img(image_path,output_path='segment_output',batch=False, model_type='vit_h'):
+def image_segment_satellite_img(image_path,output_path='segment_output',brightscale=1,batch=False, model_type='vit_h'):
     image = processimagetif(image_path)
-    img = image.get_image_withCoordinates(output_path)
+    imgpath = image.get_image_withCoordinates(output_path)
+    image_filter = imagefilter(imgpath)
+    if brightscale != 1:
+        image_filter.bright_image(brightscale)
+    image = image_filter.get_image_temp(
+        output_path=output_path, quality=100)
 
-    segment(img, output_path, batch=batch, model_type=model_type)
+    segment(image, output_path, batch=batch, model_type=model_type)
 
 
 
