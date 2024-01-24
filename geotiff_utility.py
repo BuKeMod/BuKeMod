@@ -166,7 +166,7 @@ class processimagetif:
         # coordinates_numeric = [float(coord) for coord in coordinates_list]
         # print(coordinates_numeric)
         output =f'{output_path}/{image}/{image}.tif'
-        create_folder(output_path)
+        create_folder(output_path=f'{output_path}/{image}')
         tms_to_geotiff(output=output,
                        bbox=[lon_tl, lat_tl,lon_br, lat_br], zoom=17,
                        source="Satellite", overwrite=True)
