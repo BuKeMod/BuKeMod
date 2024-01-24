@@ -150,7 +150,7 @@ class processimagetif:
     def get_image_withCoordinates(self,output_path=''):
         import rasterio
         from pyproj import Proj, transform
-        from filefolder_manage import getfilename
+        from filefolder_manage import getfilename,create_folder
         image = getfilename(self.file_path)
 
 
@@ -166,6 +166,7 @@ class processimagetif:
         # coordinates_numeric = [float(coord) for coord in coordinates_list]
         # print(coordinates_numeric)
         output =f'{output_path}/{image}.tif'
+        create_folder(output_path)
         tms_to_geotiff(output=output,
                        bbox=[lon_tl, lat_tl,lon_br, lat_br], zoom=17,
                        source="Satellite", overwrite=True)
