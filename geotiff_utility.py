@@ -4,13 +4,13 @@ from rasterio.warp import transform_geom
 import sys
 from samgeo import tms_to_geotiff
 from PIL import Image
-
+import os
 
 class processimagetif:
     def __init__(self, file_path, skip=False):
-        print(skip)
         if skip or self.is_tiff_file(file_path):
             self.file_path = file_path
+            self.directory, self.filename = os.path.split(file_path)
             self.image = rasterio.open(file_path)
         else:
             raise ValueError(
@@ -90,23 +90,32 @@ class processimagetif:
     #     with rasterio.open(output_path, 'w', driver=driver, count=1, dtype=data.dtype, crs=crs, transform=transform) as dst:
     #         dst.write(data, 1)
 
-    def calculate_rectangle_coordinates_latlng_tif(self):
+    def calculate_rectangle_coordinates_latlng_tif(self,lat=0,lon=0):
         # Open the TIFF file
 
         widthheight_pixel = self.get_geotiff_crs_pixel()
+        print(widthheight_pixel)
         # Get image size
         width_pixels = widthheight_pixel['width']
         height_pixels = widthheight_pixel['height']
-
-        result_convert = self.pixel_coordinates_to_latlon()
-
-        center_lat, center_lng = result_convert['lat_convert_EPSG4326'], result_convert['lon_convert_EPSG4326']
-
+        if lat and lon == 0:
+            result_convert = self.pixel_coordinates_to_latlon()
+            center_lat, center_lng = result_convert['lat_convert_EPSG4326'], result_convert['lon_convert_EPSG4326']
+        else:
+            center_lat, center_lng = lat, lon
         # Adjust the scale factor based on your specific data and mapping system
         # scale_factor_lat = 0.00000025  # Adjust this value as needed
         # scale_factor_lng = 0.00000025  # Adjust this value as needed
-        scale_factor_lat = 0.000005  # Adjust this value as needed
-        scale_factor_lng = 0.000005  # Adjust this value as needed
+
+        scale_factor_lat = 0.0000005  # Adjust this value as needed
+        scale_factor_lng = 0.0000005  # Adjust this value as needed
+
+
+        # scale_factor_lat = 0.000005  # Adjust this value as needed
+        # scale_factor_lng = 0.000005  # Adjust this value as needed
+
+        # scale_factor_lat = 0.00001  # Adjust this value as needed
+        # scale_factor_lng = 0.00001  # Adjust this value as needed
 
         # Calculate the coordinates of the corners
         top_left_lat = center_lat - (height_pixels / 2) * scale_factor_lat
@@ -133,20 +142,40 @@ class processimagetif:
 
         return {
             "Coordinates": f"Coordinates: lon_min={top_left_lng:.5f}, lat_min={top_left_lat:.5f}, lon_max={bottom_right_lng:.5f}, lat_max={bottom_right_lat:.5f}",
-            "Raw_Coordinates": f"{top_left_lng:.4f},{top_left_lat:.4f},{bottom_right_lng:.4f},{bottom_right_lat:.4f}"
-        }
-    
+            "Raw_Coordinates": f"{top_left_lng},{top_left_lat},{bottom_right_lng},{bottom_right_lat}",
+            "Coordinates4": f"{top_left_lng:.4f},{top_left_lat:.4f},{bottom_right_lng:.4f},{bottom_right_lat:.4f}"
 
-    def get_image_withCoordinates(self):
+        }
+
+    def get_image_withCoordinates(self,output_path=''):
+        import rasterio
+        from pyproj import Proj, transform
         from filefolder_manage import getfilename
         image = getfilename(self.file_path)
-        print(image)
-        bbox = self.calculate_rectangle_coordinates_latlng_tif()
-        print(bbox)
-        # tms_to_geotiff(output=image, bbox=bbox, zoom=17, source="Satellite", overwrite=True)
+
+
+        # หาพิกัดของทั้ง 4 มุมของ GeoTIFF
+        lon_tl, lat_tl = transform(Proj(self.image.crs), Proj(init='epsg:4326'), self.image.bounds.left, self.image.bounds.top)
+        # lon_tr, lat_tr = transform(Proj(src.crs), Proj(init='epsg:4326'), self.image.bounds.right, self.image.bounds.top)
+        # lon_bl, lat_bl = transform(Proj(src.crs), Proj(init='epsg:4326'), self.image.bounds.left, self.image.bounds.bottom)
+        lon_br, lat_br = transform(Proj(self.image.crs), Proj(init='epsg:4326'), self.image.bounds.right, self.image.bounds.bottom)
+
+
+        # coordinates_list = Coordinates['Raw_Coordinates'].split(',')
+        # แปลงทุกค่าในลิสต์เป็นตัวเลข
+        # coordinates_numeric = [float(coord) for coord in coordinates_list]
+        # print(coordinates_numeric)
+        output =f'{output_path}/{image}.tif'
+        tms_to_geotiff(output=output,
+                       bbox=[lon_tl, lat_tl,lon_br, lat_br], zoom=17,
+                       source="Satellite", overwrite=True)
+        self.image = rasterio.open(output)
+        return output
+
+
 
 if __name__ == '__main__':
-    im = processimagetif('./img/Image.tif')
+    im = processimagetif('img/Task-of-2023-12-19T112104744Z-orthophoto.tif')
     # im1 = processimagetif('./img/Task-of-2023-12-19T112104744Z-orthophoto.tif')
     # im2 = processimagetif('./img/satellite (2).tif')
     #

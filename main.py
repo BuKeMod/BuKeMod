@@ -83,15 +83,27 @@ def image_detection(image_path, output_path='detection_output', brightscale=1, t
     folder_to_zip(f'*{output_path}', 'segment_output')
 
 
+
+def image_segment_satellite_img(image_path,output_path='segment_output',batch=False, model_type='vit_h'):
+    image = processimagetif(image_path)
+    img = image.get_image_withCoordinates(output_path)
+
+    segment(img, output_path, batch=batch, model_type=model_type)
+
+
+
 if __name__ == '__main__':
     args = create_parser()
     brightscale = args.bright
     model_type = args.model_type
     text_prompt = 'house'
 
-    image_segment(image_path=args.image_path, brightscale=brightscale,
-                  batch=args.batch, model_type=model_type)
+    # image_segment(image_path=args.image_path, brightscale=brightscale,
+    #               batch=args.batch, model_type=model_type)
+    #
     # image_detection(image_path=args.image_path, text_prompt=text_prompt,
     #                 brightscale=1.2, box_threshold=0.2, text_threshold=0.2)
 
+    image_segment_satellite_img(image_path=args.image_path,
+                  batch=args.batch, model_type=model_type)
 # main.py
