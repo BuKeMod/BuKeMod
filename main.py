@@ -1,7 +1,7 @@
 from image_filter import imagefilter
 from filefolder_manage import setimagepath, folder_to_zip
 from geotiff_utility import processimagetif
-from sam_segment import segment
+from sam_segment import segment ,segment_drone
 from sam_object_detection import detection
 from argumentParser import create_parser
 
@@ -95,6 +95,21 @@ def image_segment_satellite_img(image_path,output_path='segment_output',brightsc
 
     segment(image, output_path, batch=batch, model_type=model_type)
 
+    folder_to_zip(f'*{output_path}', 'segment_output')
+
+
+def image_segment_drone(image_path,output_path='segment_output',brightscale=1,batch=False, model_type='vit_h'):
+    from resize_image import resize_image_scale
+    image_filter = imagefilter(image_path)
+    if brightscale != 1:
+        image_filter.bright_image(brightscale)
+    image = image_filter.get_image_temp(
+        output_path=output_path, quality=100)
+    image_resize = resize_image_scale(image)
+    
+    segment_drone(image_path,image_resize, output_path, batch=batch, model_type=model_type)
+
+    folder_to_zip(f'*{output_path}', 'segment_output')
 
 
 if __name__ == '__main__':

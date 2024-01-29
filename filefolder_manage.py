@@ -8,6 +8,9 @@ def getfilename(file_path):
         name_without_extension = os.path.splitext(filename)[0]
         # return self.filename
         return name_without_extension
+def getdirpath(file_path):
+        directory, filename = os.path.split(file_path)
+        return directory
 
 def setimagepath(folder_path):
     try:
