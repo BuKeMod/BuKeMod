@@ -109,7 +109,7 @@ def image_segment_drone(image_path,output_path='segment_output',brightscale=1,ba
     
     segment_drone(image_path,image_resize, output_path, batch=batch, model_type=model_type)
 
-    folder_to_zip(f'*{output_path}', 'segment_output')
+    folder_to_zip(f'{output_path}', 'segment_output')
 
 
 if __name__ == '__main__':
@@ -122,11 +122,11 @@ if __name__ == '__main__':
     #               batch=args.batch, model_type=model_type)
     #
     # image_detection(image_path=args.image_path, text_prompt=text_prompt,
-    #                 brightscale=1.2, box_threshold=0.2, text_threshold=0.2)
+    #                 brightscale=brightscale, box_threshold=0.2, text_threshold=0.2)
 
     # image_segment_satellite_img(image_path=args.image_path,
     #               batch=args.batch, model_type=model_type)
 
-    image_segment_drone(image_path=args.image_path,
+    image_segment_drone(image_path=args.image_path,brightscale=brightscale,
                   batch=args.batch, model_type=model_type)
 # main.py

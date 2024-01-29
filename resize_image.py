@@ -35,7 +35,7 @@ def resize_image_scale(input_path):
 
     # Resize the image
     image = image.resize((new_width, new_height))
-    save_path = f'{dir}/{filename}_resized.png'
+    save_path = f'{dir}/{filename}_resized.tif'
     # Save the resized image
     image.save(save_path)
     return save_path
