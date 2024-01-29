@@ -105,7 +105,7 @@ def segment_drone(image_path,image_resize, output_path='segment_output', filenam
 
  
 
-    image_tiff = image_to_tif(image=imagepath_restore, source=image_path, output_path=getdirpath(imagepath_restore), output_name=getfilename(imagepath_restore)
+    image_tiff = image_to_tif(image=imagepath_restore, source=image_path, output_path=getdirpath(imagepath_restore), output_name=getfilename(imagepath_restore))
 
 
     sam.raster_to_vector(image_tiff,shapefile)
