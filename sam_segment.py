@@ -4,6 +4,9 @@ import numpy
 from filefolder_manage import create_folder,folder_to_zip
 import os
 
+import geopandas as gpd
+import shapely
+
 def segment(image, output_path='segment_output', filename=None,batch=False,model_type='vit_h'):
 
 
@@ -108,11 +111,14 @@ def segment_drone(image_path,image_resize, output_path='segment_output', filenam
     image_tiff = image_to_tif(image=imagepath_restore, source=image_path, output_path=getdirpath(imagepath_restore), output_name=getfilename(imagepath_restore))
 
 
-    sam.raster_to_vector(image_tiff,shapefile)
+    raster_to_vector(image_tiff,shapefile,area_threshold=1000)
     
    
 
     # sam.show_masks(cmap="binary_r")
+
+
+
 
 
 
@@ -130,3 +136,47 @@ def create_folder_from_imageformat(image,output_path,filename):
         filename = "segment_mask"
     
     return filename
+
+
+
+
+def raster_to_vector(source, output, simplify_tolerance=None, dst_crs=None, area_threshold=1000, **kwargs):
+    from rasterio import features
+
+
+    with rasterio.open(source) as src:
+        band = src.read()
+
+        mask = band != 0
+        shapes = features.shapes(band, mask=mask, transform=src.transform)
+
+    fc = [
+        {"geometry": shapely.geometry.shape(shape), "properties": {"value": value}}
+        for shape, value in shapes
+    ]
+
+    if simplify_tolerance is not None:
+        for i in fc:
+            i["geometry"] = i["geometry"].simplify(tolerance=simplify_tolerance)
+
+    gdf = gpd.GeoDataFrame.from_features(fc)
+    if src.crs is not None:
+        gdf.set_crs(crs=src.crs, inplace=True)
+
+    if dst_crs is not None:
+        gdf = gdf.to_crs(dst_crs)
+
+    if area_threshold is not None:
+        # Create a new column 'area' to store the area of each geometry
+        gdf['area'] = gdf['geometry'].area
+
+        # Define a condition to filter out small polygons
+        condition = gdf['area'] > area_threshold
+
+        # Filter the GeoDataFrame based on the condition
+        gdf = gdf[condition]
+
+        # Drop the 'area' column as it is no longer needed
+        gdf = gdf.drop(columns=['area'])
+
+    gdf.to_file(output, **kwargs)

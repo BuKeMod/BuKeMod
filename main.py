@@ -124,6 +124,9 @@ if __name__ == '__main__':
     # image_detection(image_path=args.image_path, text_prompt=text_prompt,
     #                 brightscale=1.2, box_threshold=0.2, text_threshold=0.2)
 
-    image_segment_satellite_img(image_path=args.image_path,
+    # image_segment_satellite_img(image_path=args.image_path,
+    #               batch=args.batch, model_type=model_type)
+
+    image_segment_drone(image_path=args.image_path,
                   batch=args.batch, model_type=model_type)
 # main.py
