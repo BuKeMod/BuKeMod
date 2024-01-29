@@ -6,7 +6,7 @@ import os
 
 import geopandas as gpd
 import shapely
-
+import rasterio
 def segment(image, output_path='segment_output', filename=None,batch=False,model_type='vit_h'):
 
 
@@ -141,6 +141,7 @@ def create_folder_from_imageformat(image,output_path,filename):
 
 
 def raster_to_vector(source, output, simplify_tolerance=None, dst_crs=None, area_threshold=1000, **kwargs):
+
     from rasterio import features
 
 
