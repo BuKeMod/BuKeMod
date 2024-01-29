@@ -85,7 +85,7 @@ def segment_drone(image_path,image_resize, output_path='segment_output', filenam
     )
         
 
-    filename = create_folder_from_imageformat(image_resize,output_path,filename)
+    filename = create_folder_from_imageformat(image_path,output_path,filename)
 
 
     mask = f"{output_path}/{filename}/segment_mask.tif"
@@ -101,8 +101,11 @@ def segment_drone(image_path,image_resize, output_path='segment_output', filenam
     imagepath_restore = restore_original_size(image_path, mask)
 
     from image_to_image import image_to_tif
+    from filefolder_manage import getfilename,getdirpath
 
-    image_tiff = image_to_tif(image=imagepath_restore, source=image_path)
+ 
+
+    image_tiff = image_to_tif(image=imagepath_restore, source=image_path, output_path=getdirpath(imagepath_restore), output_name=getfilename(imagepath_restore)
 
 
     sam.raster_to_vector(image_tiff,shapefile)

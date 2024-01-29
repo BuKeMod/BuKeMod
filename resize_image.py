@@ -9,7 +9,7 @@ def calculate_scale_factor(width, height, target_size):
     scale_factor = target_size / min_dimension
     return scale_factor
 
-def resize_image_scale(input_path, output_path):
+def resize_image_scale(input_path):
     dir = getdirpath(input_path)
     filename = getfilename(input_path)
     # Open the image
@@ -40,9 +40,9 @@ def resize_image_scale(input_path, output_path):
     image.save(save_path)
     return save_path
 
-def restore_original_size(original_path, resized_path, output_path):
-    dir = getdirpath(input_path)
-    filename = getfilename(input_path)
+def restore_original_size(original_path, resized_path):
+    dir = getdirpath(resized_path)
+    filename = getfilename(resized_path)
     # Open the original image
     original_image = Image.open(original_path)
 
