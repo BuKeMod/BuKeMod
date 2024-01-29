@@ -99,7 +99,13 @@ def segment_drone(image_path,image_resize, output_path='segment_output', filenam
 
     from resize_image import restore_original_size
     imagepath_restore = restore_original_size(image_path, mask)
-    sam.raster_to_vector(imagepath_restore,shapefile)
+
+    from image_to_image import image_to_tif
+
+    image_tiff = image_to_tif(image=imagepath_restore, source=image_path)
+
+
+    sam.raster_to_vector(image_tiff,shapefile)
     
    
 
