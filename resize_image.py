@@ -71,5 +71,3 @@ if __name__ == '__main__':
     scale_factor = 0.1  # Adjust this value based on how much you want to resize the image
 
     # resize_image_scale(input_path_original, output_path_resized, scale_factor)
-
-    resize_image_input(input_path_original, output_path_resized)
