@@ -1,7 +1,7 @@
 from PIL import Image
 #pillow 9.5.0
 import os
-from filefolder_manage import getfilename, getdirpath
+from filefolder_manage import getfilename, getdirpath,create_folder
 
 def calculate_scale_factor(width, height, target_size):
     # Calculate the scale factor based on the smaller dimension
@@ -9,9 +9,11 @@ def calculate_scale_factor(width, height, target_size):
     scale_factor = target_size / min_dimension
     return scale_factor
 
-def resize_image_scale(input_path):
+def resize_image_scale(input_path,output_path):
     dir = getdirpath(input_path)
     filename = getfilename(input_path)
+
+    create_folder(output_path)
     # Open the image
     image = Image.open(input_path)
 
@@ -35,7 +37,7 @@ def resize_image_scale(input_path):
 
     # Resize the image
     image = image.resize((new_width, new_height))
-    save_path = f'{dir}/{filename}_resized.tif'
+    save_path = f'{output_path}/{filename}/{filename}_resized.tif'
     # Save the resized image
     image.save(save_path)
     return save_path

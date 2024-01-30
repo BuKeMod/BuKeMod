@@ -109,7 +109,7 @@ def image_segment_drone(image_path,output_path='segment_output',brightscale=1,ba
         
         segment_drone(image_path,image_resize, output_path, batch=batch, model_type=model_type)
     else:
-        image_resize = resize_image_scale(image_path)
+        image_resize = resize_image_scale(image_path,output_path)
         segment_drone(image_path,image_resize, output_path, batch=batch, model_type=model_type)
         
     folder_to_zip(f'{output_path}', 'segment_output')
