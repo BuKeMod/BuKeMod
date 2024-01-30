@@ -4,7 +4,7 @@ from geotiff_utility import processimagetif
 from sam_segment import segment ,segment_drone
 from sam_object_detection import detection
 from argumentParser import create_parser
-
+from resize_image import resize_image_scale
 
 def image_segment(image_path, output_path='segment_output', brightscale=1, batch=False, model_type='vit_h'):
 
@@ -80,7 +80,7 @@ def image_detection(image_path, output_path='detection_output', brightscale=1, t
         filename = image_filter.get_filename()
         print(f"{filename} detection success")
 
-    folder_to_zip(f'*{output_path}', 'segment_output')
+    folder_to_zip(f'{output_path}', 'segment_output')
 
 
 
@@ -95,23 +95,44 @@ def image_segment_satellite_img(image_path,output_path='segment_output',brightsc
 
     segment(image, output_path, batch=batch, model_type=model_type)
 
-    folder_to_zip(f'*{output_path}', 'segment_output')
+    folder_to_zip(f'{output_path}', 'segment_output')
 
 
 def image_segment_drone(image_path,output_path='segment_output',brightscale=1,batch=False, model_type='vit_h'):
-    from resize_image import resize_image_scale
-    image_filter = imagefilter(image_path)
-    if brightscale != 1:
-        image_filter.bright_image(brightscale)
-        image = image_filter.get_image_temp(
-            output_path=output_path, quality=100)
-        image_resize = resize_image_scale(image)
-        
-        segment_drone(image_path,image_resize, output_path, batch=batch, model_type=model_type)
+
+    image_paths = setimagepath(image_path)
+    if isinstance(image_paths, list):
+        print("---multi image segment drone process---")
+
+        for image_filter in image_paths:
+
+            image_path = image_filter
+
+            if brightscale != 1:
+                image_filter = imagefilter(image_path)
+                image_filter.bright_image(brightscale)
+                image = image_filter.get_image_temp(
+                    output_path=output_path, quality=100)
+                image_resize = resize_image_scale(image)
+
+                segment_drone(image_path,image_resize, output_path, batch=batch, model_type=model_type)
+            else:
+                image_resize = resize_image_scale(image_path,output_path)
+                segment_drone(image_path,image_resize, output_path, batch=batch, model_type=model_type)
+
     else:
-        image_resize = resize_image_scale(image_path,output_path)
-        segment_drone(image_path,image_resize, output_path, batch=batch, model_type=model_type)
-        
+        if brightscale != 1:
+            image_filter = imagefilter(image_path)
+            image_filter.bright_image(brightscale)
+            image = image_filter.get_image_temp(
+                output_path=output_path, quality=100)
+            image_resize = resize_image_scale(image)
+
+            segment_drone(image_path, image_resize, output_path, batch=batch, model_type=model_type)
+        else:
+            image_resize = resize_image_scale(image_path, output_path)
+            segment_drone(image_path, image_resize, output_path, batch=batch, model_type=model_type)
+
     folder_to_zip(f'{output_path}', 'segment_output')
 
 
