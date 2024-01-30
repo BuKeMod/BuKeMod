@@ -13,7 +13,7 @@ def resize_image_scale(input_path,output_path):
     dir = getdirpath(input_path)
     filename = getfilename(input_path)
 
-    create_folder(output_path)
+    create_folder(output_path=f'{output_path}/{filename}')
     # Open the image
     image = Image.open(input_path)
 
