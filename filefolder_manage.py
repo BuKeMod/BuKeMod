@@ -3,6 +3,7 @@ import zipfile
 import shutil
 import glob
 
+
 def getfilename(file_path):
         directory, filename = os.path.split(file_path)
         name_without_extension = os.path.splitext(filename)[0]
@@ -11,6 +12,11 @@ def getfilename(file_path):
 def getdirpath(file_path):
         directory, filename = os.path.split(file_path)
         return directory
+
+def copy_img(imgtif_path, output_path='output_folder/'):
+
+    shutil.copy(imgtif_path, output_path)
+
 
 def setimagepath(folder_path):
     try:
@@ -69,6 +75,4 @@ def folder_to_zip(output_path='fiteroutput', zipname='output_zip'):
 
 
 # if __name__ == '__main__':
-#     # create_folder()
-# #     delete_folder()
-# #     folder_to_zip()
+#     copy_img('img\Task-of-2023-12-19T112104744Z-orthophoto.tif','2.tif')

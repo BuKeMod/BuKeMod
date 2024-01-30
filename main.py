@@ -103,12 +103,15 @@ def image_segment_drone(image_path,output_path='segment_output',brightscale=1,ba
     image_filter = imagefilter(image_path)
     if brightscale != 1:
         image_filter.bright_image(brightscale)
-    image = image_filter.get_image_temp(
-        output_path=output_path, quality=100)
-    image_resize = resize_image_scale(image)
-    
-    segment_drone(image_path,image_resize, output_path, batch=batch, model_type=model_type)
-
+        image = image_filter.get_image_temp(
+            output_path=output_path, quality=100)
+        image_resize = resize_image_scale(image)
+        
+        segment_drone(image_path,image_resize, output_path, batch=batch, model_type=model_type)
+    else:
+        image_resize = resize_image_scale(image_path)
+        segment_drone(image_path,image_resize, output_path, batch=batch, model_type=model_type)
+        
     folder_to_zip(f'{output_path}', 'segment_output')
 
 
