@@ -32,12 +32,17 @@ class imagefilter:
         self.image = np.clip(self.image * scale, 0, 255)
 
 
-    def Blur_image(self, scalepixelx=3, scalepixely=3,deviation=1):
+    def blur_image(self, scalepixelx=3, scalepixely=3,deviation=1):
         self.image = cv2.GaussianBlur(self.image, (scalepixelx,scalepixely ), deviation )
 
     def hsv_image(self):
         self.image = cv2.cvtColor(self.image, cv2.COLOR_RGB2HSV)
 
+    def gray_image(self):
+        self.image = cv2.cvtColor(self.image, cv2.COLOR_RGB2GRAY)
+
+    def rgb_image(self):
+        self.image = cv2.cvtColor(self.image, cv2.COLOR_BGR2RGB)
 
 
     def imageshow(self):
