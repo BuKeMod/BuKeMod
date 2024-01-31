@@ -18,10 +18,10 @@ def detection(image,output_path='detection_output',text_prompt='fram',box_thresh
 
 
     sam.show_anns(
-        cmap='Accent_r',
+        cmap='Greens',
         box_color='red',
         title=f'Automatic Segmentation of {text_prompt}',
-        blend=False,
+        blend=True,
         output=f'{output_path}/{filename}/{filename}_detection_boxs.tif'
     )
 
