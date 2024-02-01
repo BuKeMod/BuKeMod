@@ -6,7 +6,32 @@ from sam_object_detection import detection
 from argumentParser import create_parser
 from resize_image import resize_image_scale
 
-def image_segment(image_path, output_path='segment_output', brightscale=1, batch=False, model_type='vit_h'):
+
+from dotenv import dotenv_values
+
+configs = dotenv_values(".env.configs")
+
+
+
+
+def filter_image(image):
+    brightscale = configs['BRIGHT']
+    blur_image = configs['BLUR_IMAGE']
+    hsv_image = configs['HSV_IMAGE']
+    gray_image = configs['GRAY_IMAGE']
+    if brightscale != False:
+        image.bright_image(brightscale)
+    if blur_image != False:
+        image.blur_image() 
+    if hsv_image != False:
+        image.hsv_image()
+    if gray_image != False:
+        image.gray_image()
+    
+    
+
+
+def image_segment(image_path, output_path='segment_output',batch=False, model_type='vit_h'):
 
     image_paths = setimagepath(image_path)
 
@@ -17,8 +42,7 @@ def image_segment(image_path, output_path='segment_output', brightscale=1, batch
         # ให้ ImageFilter ปรับภาพแต่ละรูป
         for image_filter in image_filters:
 
-            if brightscale != 1:
-                image_filter.bright_image(brightscale)
+            filter_image(image_filter)
             image = image_filter.get_image_temp(
                 output_path=output_path, quality=100)
 
@@ -114,7 +138,6 @@ def image_segment_drone(image_path,output_path='segment_output',brightscale=1,ba
                 image = image_filter.get_image_temp(
                     output_path=output_path, quality=100)
                 image_resize = resize_image_scale(image,output_path)
-
                 segment_drone(image_path,image_resize, output_path, batch=batch, model_type=model_type)
             else:
                 image_resize = resize_image_scale(image_path,output_path)
@@ -137,20 +160,32 @@ def image_segment_drone(image_path,output_path='segment_output',brightscale=1,ba
 
 
 if __name__ == '__main__':
-    args = create_parser()
-    brightscale = args.bright
-    model_type = args.model_type
-    text_prompt = 'house'
+    
+    
 
-    # image_segment(image_path=args.image_path, brightscale=brightscale,
-    #               batch=args.batch, model_type=model_type)
-    #
-    # image_detection(image_path=args.image_path, text_prompt=text_prompt,
-    #                 brightscale=brightscale, box_threshold=0.2, text_threshold=0.2)
+    image_path = configs['IMAGE_PATH']
+    output_path = configs['OUTPUT_PATH']
+    batch = configs['BATCH']
+    model_type = configs['MODEL_TYPE']
 
-    # image_segment_satellite_img(image_path=args.image_path,
-    #               batch=args.batch, model_type=model_type)
+    text_prompt = configs['TEXT_PROMPT']
+    box_threshold = configs['BOX_THRESHOLD']
+    text_threshold = configs['TEXT_THRESHOLD']
 
-    image_segment_drone(image_path=args.image_path,brightscale=brightscale,
-                  batch=args.batch, model_type=model_type)
+
+
+
+    if configs['SEGMENT_TYPE'] == '1':
+        image_segment(image_path=image_path,output_path=output_path,batch=batch, model_type=model_type)
+    elif configs['SEGMENT_TYPE'] == '2':
+        image_detection(image_path=image_path,output_path=output_path, text_prompt=text_prompt,
+                         box_threshold=box_threshold, text_threshold=text_threshold)
+    elif configs['SEGMENT_TYPE'] == '3':
+        image_segment_satellite_img(image_path=image_path,output_path=output_path,
+                    batch=batch, model_type=model_type)        
+    elif configs['SEGMENT_TYPE'] == '4':
+        image_segment_drone(image_path=image_path,output_path=output_path,
+                      batch=batch, model_type=model_type)
+    else:
+        print('pls input SEGMENT_TYPE')
 # main.py

@@ -36,13 +36,22 @@ class imagefilter:
         self.image = cv2.GaussianBlur(self.image, (scalepixelx,scalepixely ), deviation )
 
     def hsv_image(self):
-        self.image = np.uint8(self.image)
-        self.image = cv2.cvtColor(self.image, cv2.COLOR_RGB2HSV)
+        try:
+            self.image = np.uint8(self.image)
+            self.image = cv2.cvtColor(self.image, cv2.COLOR_BGR2HSV)
+        except:
+            self.image = cv2.cvtColor(self.image, cv2.COLOR_RGB2HSV)
+
 
     def gray_image(self):
-        self.image = np.uint8(self.image)
-        self.image = cv2.cvtColor(self.image, cv2.COLOR_RGB2GRAY)
+        try:
+            self.image = np.uint8(self.image)
+            self.image = cv2.cvtColor(self.image, cv2.COLOR_RGB2GRAY)
+        except:
+            self.image = cv2.cvtColor(self.image, cv2.COLOR_BGR2GRAY)
 
+
+            
 
     def imageshow(self):
         cv2.imshow(f'{self.filename}', self.image)
