@@ -9,7 +9,7 @@ from resize_image import resize_image_scale
 
 from dotenv import dotenv_values
 
-configs = dotenv_values(".env.configs")
+configs = dotenv_values("env.configs")
 
 
 

@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv,dotenv_values
 
-configs = dotenv_values(".env.configs")
+configs = dotenv_values("env.configs")
 
-print(configs['BLUR_IMAGE'])
+print(configs)
 print(type(configs['BLUR_IMAGE']))
