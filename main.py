@@ -57,8 +57,8 @@ def image_segment(image_path, output_path='segment_output',batch=False, model_ty
         print("single image segment process")
 
         image_filter = imagefilter(image_path)
-        if brightscale != 1:
-            image_filter.bright_image(brightscale)
+        filter_image(image_filter)
+
         image = image_filter.get_image_temp(
             output_path=output_path, quality=100)
 
