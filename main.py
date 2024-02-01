@@ -7,19 +7,21 @@ from argumentParser import create_parser
 from resize_image import resize_image_scale
 
 
-from dotenv import dotenv_values
+import os
+from dotenv import load_dotenv,dotenv_values
 
-configs = dotenv_values("env.configs")
-
+env_path = '/env.configs'
+load_dotenv(env_path)
+configs = os.environ
 
 
 
 def filter_image(image):
-    brightscale = configs['BRIGHT']
+    brightscale = int(configs['BRIGHT'])
     blur_image = configs['BLUR_IMAGE']
     hsv_image = configs['HSV_IMAGE']
     gray_image = configs['GRAY_IMAGE']
-    if brightscale != False:
+    if brightscale != 1:
         image.bright_image(brightscale)
     if blur_image != False:
         image.blur_image() 
