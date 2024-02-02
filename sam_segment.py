@@ -8,7 +8,7 @@ import geopandas as gpd
 import shapely
 import rasterio
 
-from env_data_ import get_checkpoint,get_samkwargs
+from env_data import get_checkpoint,get_samkwargs
 def segment(image, output_path='segment_output', filename=None,batch=False,model_type='vit_h'):
 
    
