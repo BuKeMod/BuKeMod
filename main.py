@@ -47,6 +47,7 @@ def filter_image(image_path):
         return image.get_image_temp(
                 output_path=output_path, quality=quality)
     else:
+        print('No filter')
         return image_path
 
 def image_segment(image_path, output_path='segment_output',batch=False, model_type='vit_h'):
