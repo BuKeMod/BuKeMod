@@ -75,7 +75,7 @@ def image_segment(image_path, output_path='segment_output', batch=False, model_t
     folder_to_zip(f'{output_path}', 'segment_output')
 
 
-def image_detection(image_path, output_path='detection_output', brightscale=1, text_prompt='', box_threshold=0.2, text_threshold=0.2):
+def image_detection(image_path, output_path='detection_output', text_prompt='', box_threshold=0.2, text_threshold=0.2):
 
     image_paths = setimagepath(image_path)
 
@@ -134,7 +134,7 @@ def image_segment_satellite_img(image_path, output_path='segment_output', batch=
     folder_to_zip(f'{output_path}', 'segment_output')
 
 
-def image_segment_drone(image_path, output_path='segment_output', brightscale=1, batch=False, model_type='vit_h'):
+def image_segment_drone(image_path, output_path='segment_output', batch=False, model_type='vit_h'):
 
     image_paths = setimagepath(image_path)
     if isinstance(image_paths, list):
