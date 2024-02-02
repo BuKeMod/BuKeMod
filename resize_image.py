@@ -2,6 +2,7 @@ from PIL import Image
 #pillow 9.5.0
 import os
 from filefolder_manage import getfilename, getdirpath,create_folder
+from env_data import get_imageresize
 
 def calculate_scale_factor(width, height, target_size):
     # Calculate the scale factor based on the smaller dimension
@@ -22,7 +23,7 @@ def resize_image_scale(input_path,output_path):
     original_width, original_height = image.size
 
     # Set the target size
-    target_size = 1440
+    target_size = get_imageresize()
 
     # Check if either dimension is smaller than 1000
     if original_width < target_size or original_height < target_size:

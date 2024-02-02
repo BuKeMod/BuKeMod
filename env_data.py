@@ -17,6 +17,9 @@ def get_checkpoint():
 def get_batch():
     configs = env_data()
     return ast.literal_eval(configs["BATCH"])
+def get_imageresize():
+    configs = env_data()
+    return configs["IMAGE_RESIZE"]
 
 def get_samkwargs():
     configs = env_data()
