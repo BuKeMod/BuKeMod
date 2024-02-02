@@ -40,6 +40,6 @@ GRAY_IMAGE = os.getenv('GRAY_IMAGE')
 env_data = os.environ
 
 # ตรวจสอบค่าที่ถูกดึงมาทั้งหมด
-print(env_data)
+print(env_data[''])
 # ตรวจสอบค่าที่ถูกดึงมา
-print(BLUR_IMAGE)
+# print(BLUR_IMAGE)

@@ -8,6 +8,7 @@ from resize_image import resize_image_scale
 
 
 import os
+import ast
 from dotenv import load_dotenv,dotenv_values
 
 env_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'env.configs')
@@ -15,22 +16,24 @@ load_dotenv(env_path)
 configs = os.environ
 
 
-
 def filter_image(image):
-    brightscale = int(configs['BRIGHT'])
-    blur_image = configs['BLUR_IMAGE']
-    hsv_image = configs['HSV_IMAGE']
-    gray_image = configs['GRAY_IMAGE']
+    brightscale = float(configs['BRIGHT'])
+    blur_image = ast.literal_eval(configs['BLUR_IMAGE'])
+    hsv_image = ast.literal_eval(configs['HSV_IMAGE'])
+    gray_image = ast.literal_eval(configs['GRAY_IMAGE'])
+    print(blur_image)
     if brightscale != 1:
+        print('brightscale')
         image.bright_image(brightscale)
-    if blur_image != False:
-        image.blur_image() 
-    if hsv_image != False:
+    if blur_image != 'False':
+        print('blur_image')
+        image.blur_image()
+    if hsv_image != 'False':
+        print('hsv_image')
         image.hsv_image()
-    if gray_image != False:
+    if gray_image != 'False':
+        print('gray_image')
         image.gray_image()
-    
-    
 
 
 def image_segment(image_path, output_path='segment_output',batch=False, model_type='vit_h'):
