@@ -148,6 +148,7 @@ class processimagetif:
         }
 
     def get_image_withCoordinates(self,output_path):
+        print('get_image_withCoordinates')
         import rasterio
         from pyproj import Proj, transform
         from filefolder_manage import getfilename,create_folder

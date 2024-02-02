@@ -10,7 +10,7 @@ import rasterio
 
 from env_data import get_checkpoint,get_samkwargs
 def segment(image, output_path='segment_output', filename=None,batch=False,model_type='vit_h'):
-
+    print('segment')
    
 
 
@@ -40,7 +40,7 @@ def segment(image, output_path='segment_output', filename=None,batch=False,model
     # sam.show_masks(cmap="binary_r")
 
 def segment_drone(image_path,image_resize, output_path='segment_output', filename=None,batch=False,model_type='vit_h',imgtype='None'):
-
+    print('segment_drone')
 
     sam = SamGeo(
         model_type=model_type,

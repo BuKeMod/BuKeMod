@@ -13,7 +13,7 @@ def env_data():
 
 def get_checkpoint():
     configs = env_data()
-    return configs["CHECKPOINT"]
+    return configs["MODEL_CHECKPOINT"]
 def get_batch():
     configs = env_data()
     return ast.literal_eval(configs["BATCH"])
@@ -38,3 +38,5 @@ def get_samkwargs():
         return kwargs
     else:
         return None
+if __name__ == "__main__":
+    print(get_checkpoint())

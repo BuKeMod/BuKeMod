@@ -6,7 +6,7 @@ import os
 
 
 def detection(image,output_path='detection_output',text_prompt='fram',box_threshold=0.2, text_threshold=0.2):
-
+    print('detection')
     sam = LangSAM()
 
 

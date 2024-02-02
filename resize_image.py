@@ -10,6 +10,7 @@ def calculate_scale_factor(width, height, target_size):
     return scale_factor
 
 def resize_image_scale(input_path,output_path):
+    print('resize_image_scale')
     dir = getdirpath(input_path)
     filename = getfilename(input_path)
 
@@ -43,6 +44,7 @@ def resize_image_scale(input_path,output_path):
     return save_path
 
 def restore_original_size(original_path, resized_path):
+    print('restore_original_size')
     dir = getdirpath(resized_path)
     filename = getfilename(resized_path)
     # Open the original image
@@ -62,14 +64,3 @@ def restore_original_size(original_path, resized_path):
     restored_image.save(save_path)
     return save_path
 
-if __name__ == '__main__':
-    # # Example usage
-    # input_path_original = "Task.tif"
-    # output_path_resized = "resized_imageTIF.tif"
-
-    input_path_original = "segment_mask.tif"
-    output_path_resized = "over_imageTIF.tif"
-
-    scale_factor = 0.1  # Adjust this value based on how much you want to resize the image
-
-    # resize_image_scale(input_path_original, output_path_resized, scale_factor)
