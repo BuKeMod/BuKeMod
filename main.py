@@ -7,7 +7,7 @@ from argumentParser import create_parser
 from resize_image import resize_image_scale
 
 
-from env_data import env_data
+from env_data_ import env_data
 import ast
 configs = env_data()
 
