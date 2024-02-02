@@ -41,5 +41,3 @@ env_data = os.environ
 
 # ตรวจสอบค่าที่ถูกดึงมาทั้งหมด
 print(env_data[''])
-# ตรวจสอบค่าที่ถูกดึงมา
-# print(BLUR_IMAGE)
