@@ -1,5 +1,5 @@
 from image_filter import imagefilter
-from filefolder_manage import setimagepath, folder_to_zip
+from filefolder_manage import setimagepath, folder_to_zip ,getfilename
 from geotiff_utility import processimagetif
 from sam_segment import segment ,segment_drone
 from sam_object_detection import detection
@@ -30,15 +30,15 @@ def filter_image(image_path):
         print('brightscale')
         image.bright_image(brightscale)
         filter_use = True
-    if blur_image != 'False':
+    if blur_image != False:
         print('blur_image')
         image.blur_image()
         filter_use = True
-    if hsv_image != 'False':
+    if hsv_image != False:
         print('hsv_image')
         image.hsv_image()
         filter_use = True
-    if gray_image != 'False':
+    if gray_image != False:
         print('gray_image')
         image.gray_image()
         filter_use = True
@@ -63,8 +63,9 @@ def image_segment(image_path, output_path='segment_output',batch=False, model_ty
 
             segment(image_filter, output_path, batch=batch, model_type=model_type)
 
-            filename = image_filter.get_filename()
-            print(f"*{filename} segment success")
+
+            print(f"*{getfilename(image_filter)} segment success")
+
 
     else:
         print("single image segment process")
@@ -74,8 +75,7 @@ def image_segment(image_path, output_path='segment_output',batch=False, model_ty
 
         segment(image, output_path, batch=batch, model_type=model_type)
 
-        filename = image.get_filename()
-        print(f"{filename} segment success")
+        print(f"*{getfilename(image)} segment success")
     folder_to_zip(f'{output_path}', 'segment_output')
 
 
@@ -169,6 +169,8 @@ def image_segment_drone(image_path,output_path='segment_output',brightscale=1,ba
             segment_drone(image_path, image_resize, output_path, batch=batch, model_type=model_type)
 
     folder_to_zip(f'{output_path}', 'segment_output')
+
+
 
 
 if __name__ == '__main__':
