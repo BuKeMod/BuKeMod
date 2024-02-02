@@ -10,11 +10,11 @@ from resize_image import resize_image_scale
 import os
 from dotenv import load_dotenv,dotenv_values
 
-env_path = '/env.configs'
+env_path = 'env.configs'
 load_dotenv(env_path)
 configs = os.environ
 
-
+print(configs)
 
 def filter_image(image):
     brightscale = int(configs['BRIGHT'])
@@ -162,8 +162,6 @@ def image_segment_drone(image_path,output_path='segment_output',brightscale=1,ba
 
 
 if __name__ == '__main__':
-    
-    
 
     image_path = configs['IMAGE_PATH']
     output_path = configs['OUTPUT_PATH']
@@ -176,18 +174,17 @@ if __name__ == '__main__':
 
 
 
-
-    if configs['SEGMENT_TYPE'] == '1':
-        image_segment(image_path=image_path,output_path=output_path,batch=batch, model_type=model_type)
-    elif configs['SEGMENT_TYPE'] == '2':
-        image_detection(image_path=image_path,output_path=output_path, text_prompt=text_prompt,
-                         box_threshold=box_threshold, text_threshold=text_threshold)
-    elif configs['SEGMENT_TYPE'] == '3':
-        image_segment_satellite_img(image_path=image_path,output_path=output_path,
-                    batch=batch, model_type=model_type)        
-    elif configs['SEGMENT_TYPE'] == '4':
-        image_segment_drone(image_path=image_path,output_path=output_path,
-                      batch=batch, model_type=model_type)
-    else:
-        print('pls input SEGMENT_TYPE')
+    # if configs['SEGMENT_TYPE'] == '1':
+    #     image_segment(image_path=image_path,output_path=output_path,batch=batch, model_type=model_type)
+    # elif configs['SEGMENT_TYPE'] == '2':
+    #     image_detection(image_path=image_path,output_path=output_path, text_prompt=text_prompt,
+    #                      box_threshold=box_threshold, text_threshold=text_threshold)
+    # elif configs['SEGMENT_TYPE'] == '3':
+    #     image_segment_satellite_img(image_path=image_path,output_path=output_path,
+    #                 batch=batch, model_type=model_type)
+    # elif configs['SEGMENT_TYPE'] == '4':
+    #     image_segment_drone(image_path=image_path,output_path=output_path,
+    #                   batch=batch, model_type=model_type)
+    # else:
+    #     print('pls input SEGMENT_TYPE')
 # main.py
