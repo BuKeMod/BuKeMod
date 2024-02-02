@@ -10,11 +10,11 @@ from resize_image import resize_image_scale
 import os
 from dotenv import load_dotenv,dotenv_values
 
-env_path = 'env.configs'
+env_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'env.configs')
 load_dotenv(env_path)
 configs = os.environ
 
-print(configs)
+
 
 def filter_image(image):
     brightscale = int(configs['BRIGHT'])

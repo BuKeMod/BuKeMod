@@ -16,7 +16,7 @@ from dotenv import load_dotenv,dotenv_values
 
 
 # ตั้งค่า path ที่อยู่ของไฟล์ .env
-env_path = 'env.configs'
+env_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'env.configs')
 
 # ใช้คำสั่ง load_dotenv ดึงค่าจากไฟล์ .env
 load_dotenv(env_path)
