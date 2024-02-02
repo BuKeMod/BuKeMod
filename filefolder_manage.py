@@ -30,7 +30,7 @@ def setimagepath(folder_path):
                     image_paths = glob.glob(f"{folder_path}/*{extension}")
                     return image_paths
                 else:
-                    print(f"This is not a {extension} file")
+                    print(f"{filename} is not {extension} file.")
     except Exception as e:
         print('setimagepath ',e)
 

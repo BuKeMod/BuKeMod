@@ -7,24 +7,27 @@ import os
 import geopandas as gpd
 import shapely
 import rasterio
+
+from env_data import get_checkpoint,get_samkwargs
 def segment(image, output_path='segment_output', filename=None,batch=False,model_type='vit_h'):
 
-    sam_kwargs= get_samkwargs()
+   
 
 
     sam = SamGeo(
         model_type=model_type,
-        # checkpoint="/content/drive/MyDrive/model/epoch-000090-f10.98-ckpt.pth",
-        sam_kwargs=sam_kwargs,
+        checkpoint=get_checkpoint(),
+        sam_kwargs=get_samkwargs(),
     )
         
 
     filename = create_folder_from_imageformat(image,output_path,filename)
 
 
-    mask = f"{output_path}/{filename}/segment_mask.tif"
-    shapefile = f'{output_path}/{filename}/segment_shapefile.shp'
+    mask = f"{output_path}/{filename}/{filename}_segment_mask.tif"
+    shapefile = f'{output_path}/{filename}/{filename}_segment_shapefile.shp'
 
+   
     sam.generate(
         image, mask, batch=eval(batch), foreground=True, erosion_kernel=(3, 3), mask_multiplier=255,
         # sam_kwargs=sam_kwargs
@@ -39,34 +42,18 @@ def segment(image, output_path='segment_output', filename=None,batch=False,model
 def segment_drone(image_path,image_resize, output_path='segment_output', filename=None,batch=False,model_type='vit_h',imgtype='None'):
 
 
-    sam_kwargs = {
-        "points_per_side": 32,                      # points_per_side: Optional[int] = 32,
-        "points_per_batch": 64,                     # points_per_batch: int = 64,
-        "pred_iou_thresh": 0.88,                    # pred_iou_thresh: float = 0.88,
-        "stability_score_thresh": 0.95,             # stability_score_thresh: float = 0.95,
-        "stability_score_offset": 1,                # stability_score_offset: float = 1.0,
-        "box_nms_thresh": 0.7,                      # box_nms_thresh: float = 0.7,
-        "crop_n_layers": 0,                         # crop_n_layers: int = 0,
-        "crop_nms_thresh": 0.7,                     # crop_nms_thresh: float = 0.7,
-        "crop_overlap_ratio": 512 / 1500,           # crop_overlap_ratio: float = 512 / 1500,
-        "crop_n_points_downscale_factor": 1,        # crop_n_points_downscale_factor: int = 1,
-        "point_grids": None,                        # point_grids: Optional[List[np.ndarray]] = None,
-        "min_mask_region_area": 0,                  # min_mask_region_area: int = 0,
-        "output_mode":"binary_mask"                 # output_mode: str = "binary_mask",
-        }
-
     sam = SamGeo(
         model_type=model_type,
-        # checkpoint="/content/drive/MyDrive/model/epoch-000090-f10.98-ckpt.pth",
-        sam_kwargs=None,
+        checkpoint=get_checkpoint(),
+        sam_kwargs=get_samkwargs(),
     )
         
 
     filename = create_folder_from_imageformat(image_path,output_path,filename)
 
 
-    mask = f"{output_path}/{filename}/segment_mask.tif"
-    shapefile = f'{output_path}/{filename}/segment_shapefile.shp'
+    mask = f"{output_path}/{filename}/{filename}_segment_mask.tif"
+    shapefile = f'{output_path}/{filename}/{filename}_segment_shapefile.shp'
 
     sam.generate(
         image_resize, mask, batch=eval(batch), foreground=True, erosion_kernel=(3, 3), mask_multiplier=255,
@@ -156,31 +143,4 @@ def raster_to_vector(source, output, simplify_tolerance=None, dst_crs=None, area
 
     gdf.to_file(output, **kwargs)
 
-def get_samkwargs():
-    import os, ast
-    from dotenv import load_dotenv, dotenv_values
-    env_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'env.configs')
-    load_dotenv(env_path)
 
-    configs = os.environ
-    if ast.literal_eval(configs["SAM_KWARGS"]) == True :
-        kwargs = {
-            'points_per_side' : int(configs["POINTS_PER_SIDE"]),
-            'points_per_batch': int(os.getenv("POINTS_PER_BATCH")),
-            'pred_iou_thresh': float(os.getenv("PRED_IOU_THRESH")),
-            'stability_score_thresh': float(os.getenv("STABILITY_SCORE_THRESH")),
-            'stability_score_offset': float(os.getenv("STABILITY_SCORE_OFFSET")),
-            'box_nms_thresh': float(os.getenv("BOX_NMS_THRESH")),
-            'crop_n_layers': int(os.getenv("CROP_N_LAYERS")),
-            'crop_nms_thresh': float(os.getenv("CROP_NMS_THRESH")),
-            'crop_overlap_ratio': float(os.getenv("CROP_OVERLAP_RATIO")),
-            'crop_n_points_downscale_factor': int(os.getenv("CROP_N_POINTS_DOWNSCALE_FACTOR")),
-            'min_mask_region_area': int(os.getenv("MIN_MASK_REGION_AREA")),
-            'output_mode': os.getenv("OUTPUT_MODE")
-                    }
-        return kwargs
-    else:
-        return None
-
-if __name__ == '__main__':
-    get_samkwargs()
