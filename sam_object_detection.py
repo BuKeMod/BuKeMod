@@ -24,8 +24,16 @@ def detection(image,output_path='detection_output',text_prompt='fram',box_thresh
         blend=True,
         output=f'{output_path}/{filename}/{filename}_detection_boxs.tif'
     )
+    sam.show_anns(
+        cmap='Greys_r',
+        add_boxes=False,
+        alpha=1,
+        title='Automatic Segmentation of Trees',
+        blend=False,
+        output=f'{output_path}/{filename}/{filename}_binary.tif'
+    )
 
-    sam.raster_to_vector(f'{output_path}/{filename}/{filename}_detection_boxs.tif', f'{output_path}/{filename}/{filename}_detection_shapefile.shp')
+    sam.raster_to_vector(f'{output_path}/{filename}/{filename}_binary.tif', f'{output_path}/{filename}/{filename}_detection_shapefile.shp')
     
 
 
