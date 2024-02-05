@@ -91,7 +91,7 @@ def image_detection(image_path, output_path='detection_output', text_prompt='', 
             detection(image_filter, output_path, text_prompt,
                       box_threshold, text_threshold)
 
-            print(f"{getfilename(image)}  detection success")
+            print(f"{getfilename(image_filter)}  detection success")
     else:
         print("---single image detection process---")
 
