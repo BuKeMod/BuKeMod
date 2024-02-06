@@ -19,7 +19,7 @@ def get_batch():
     return ast.literal_eval(configs["BATCH"])
 def get_imageresize():
     configs = env_data()
-    return configs["IMAGE_RESIZE"]
+    return int(configs["IMAGE_RESIZE"])
 
 def get_samkwargs():
     configs = env_data()
