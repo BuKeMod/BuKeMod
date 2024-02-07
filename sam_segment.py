@@ -8,24 +8,27 @@ import geopandas as gpd
 import shapely
 import rasterio
 
-from env_data import get_checkpoint,get_samkwargs
-def segment(image, output_path='segment_output', filename=None,batch=False,model_type='vit_h'):
+
+from env_data import env_data
+envdata = env_data()
+file_extension = envdata.get_output_extension()
+area_threshold = envdata.get_min_polygon_area()
+batch = envdata.get_batch()
+
+def segment(image, output_path='segment_output', filename=None):
     print('segment')
    
 
 
-    sam = SamGeo(
-        model_type=model_type,
-        checkpoint=get_checkpoint(),
-        sam_kwargs=get_samkwargs(),
-    )
+    sam = create_sam(env_data.get_model())
         
 
     filename = create_folder_from_imageformat(image,output_path,filename)
 
+    
 
     mask = f"{output_path}/{filename}/{filename}_segment_mask.tif"
-    shapefile = f'{output_path}/{filename}/{filename}_segment_shapefile.shp'
+    shapefile = f'{output_path}/{filename}/{filename}_segment_{file_extension}_file.{file_extension}'
 
    
     sam.generate(
@@ -34,26 +37,22 @@ def segment(image, output_path='segment_output', filename=None,batch=False,model
     )
 
 
-    sam.raster_to_vector(mask,shapefile)
+    raster_to_vector(mask,shapefile,area_threshold)
    
 
     # sam.show_masks(cmap="binary_r")
 
-def segment_drone(image_path,image_resize, output_path='segment_output', filename=None,batch=False,model_type='vit_h',imgtype='None'):
+def segment_drone(image_path,image_resize, output_path='segment_output', filename=None,imgtype='None'):
     print('segment_drone')
 
-    sam = SamGeo(
-        model_type=model_type,
-        checkpoint=get_checkpoint(),
-        sam_kwargs=get_samkwargs(),
-    )
+    sam = create_sam(env_data.get_model())
         
 
     filename = create_folder_from_imageformat(image_path,output_path,filename)
 
 
     mask = f"{output_path}/{filename}/{filename}_segment_mask.tif"
-    shapefile = f'{output_path}/{filename}/{filename}_segment_shapefile.shp'
+    shapefile = f'{output_path}/{filename}/{filename}_segment_{file_extension}_file.{file_extension}'
 
     sam.generate(
         image_resize, mask, batch=eval(batch), foreground=True, erosion_kernel=(3, 3), mask_multiplier=255,
@@ -72,16 +71,32 @@ def segment_drone(image_path,image_resize, output_path='segment_output', filenam
     image_tiff = image_to_tif(image=imagepath_restore, source=image_path, output_path=getdirpath(imagepath_restore), output_name=getfilename(imagepath_restore))
 
 
-    raster_to_vector(image_tiff,shapefile,area_threshold=999)
+    raster_to_vector(image_tiff,shapefile,area_threshold)
     
    
 
     # sam.show_masks(cmap="binary_r")
 
 
-
-
-
+def create_sam(sam_type):
+    if sam_type == 'sam':
+        from samgeo import SamGeo
+        sam = SamGeo(
+            model_type=envdata.get_model_type(),
+            checkpoint=envdata.get_checkpoint(),
+            sam_kwargs=envdata.get_samkwargs(),
+        )
+        return sam
+    elif sam_type == 'hqsam':
+        from samgeo.hq_sam import SamGeo
+        sam = SamGeo(
+            model_type=envdata.get_model_type(),
+            checkpoint=envdata.get_checkpoint(),
+            sam_kwargs=envdata.get_samkwargs(),
+        )
+        return sam
+    else:
+        print('sam_type not found or not support,please enter sam or hqsam.')
 
 def create_folder_from_imageformat(image,output_path,filename):
     if type(image) == numpy.ndarray and filename != None:

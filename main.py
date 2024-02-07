@@ -47,7 +47,7 @@ def filter_image(image_path):
         return image_path
 
 
-def image_segment(image_path, output_path='segment_output', batch=False, model_type='vit_h'):
+def image_segment(image_path, output_path='segment_output'):
 
     image_paths = setimagepath(image_path)
 
@@ -59,8 +59,8 @@ def image_segment(image_path, output_path='segment_output', batch=False, model_t
         # ให้ ImageFilter ปรับภาพแต่ละรูป
         for image_filter in image_filters:
 
-            segment(image_filter, output_path,
-                    batch=batch, model_type=model_type)
+            segment(image_filter, output_path
+                     )
 
             print(f"*{getfilename(image_filter)} segment success")
 
@@ -69,7 +69,7 @@ def image_segment(image_path, output_path='segment_output', batch=False, model_t
 
         image = filter_image(image_path)
 
-        segment(image, output_path, batch=batch, model_type=model_type)
+        segment(image, output_path)
 
         print(f"{getfilename(image)} segment success")
     folder_to_zip(f'{output_path}', 'segment_output')
@@ -105,7 +105,7 @@ def image_detection(image_path, output_path='detection_output', text_prompt='', 
     folder_to_zip(f'{output_path}', 'segment_output')
 
 
-def image_segment_satellite_img(image_path, output_path='segment_output', batch=False, model_type='vit_h'):
+def image_segment_satellite_img(image_path, output_path='segment_output'):
     image_paths = setimagepath(image_path)
 
     if isinstance(image_paths, list):
@@ -119,7 +119,7 @@ def image_segment_satellite_img(image_path, output_path='segment_output', batch=
             image = processimagetif(image_filter)
             imgpath = image.get_image_withCoordinates(output_path)
 
-            segment(imgpath, output_path, batch=batch, model_type=model_type)
+            segment(imgpath, output_path)
 
             print(f"{getfilename(image)} satellite segment success")
     else:
@@ -128,13 +128,13 @@ def image_segment_satellite_img(image_path, output_path='segment_output', batch=
 
         image = filter_image(imgpath)
 
-        segment(image, output_path, batch=batch, model_type=model_type)
+        segment(image, output_path)
         print(f"{getfilename(image)} satellite segment success")
 
     folder_to_zip(f'{output_path}', 'segment_output')
 
 
-def image_segment_drone(image_path, output_path='segment_output', batch=False, model_type='vit_h'):
+def image_segment_drone(image_path, output_path='segment_output'):
 
     image_paths = setimagepath(image_path)
     if isinstance(image_paths, list):
@@ -144,14 +144,14 @@ def image_segment_drone(image_path, output_path='segment_output', batch=False, m
 
             image = filter_image(image_filter)
             image_resize = resize_image_scale(image, output_path)
-            segment_drone(image_path, image_resize, output_path,
-                          batch=batch, model_type=model_type)
+            segment_drone(image_path, image_resize, output_path
+                          )
             print(f"{getfilename(image)} drone segment success")
     else:
         image = filter_image(image_path)
         image_resize = resize_image_scale(image, output_path)
-        segment_drone(image_path, image_resize, output_path,
-                      batch=batch, model_type=model_type)
+        segment_drone(image_path, image_resize, output_path
+                       )
         print(f"{getfilename(image)} drone segment success")
     folder_to_zip(f'{output_path}', 'segment_output')
 
@@ -160,25 +160,21 @@ if __name__ == '__main__':
 
     image_path = configs['IMAGE_PATH']
     output_path = configs['OUTPUT_PATH']
-    batch = configs['BATCH']
-    model_type = configs['MODEL_TYPE']
+
 
     text_prompt = configs['TEXT_PROMPT']
     box_threshold = float(configs['BOX_THRESHOLD'])
     text_threshold = float(configs['TEXT_THRESHOLD'])
 
     if configs['SEGMENT_TYPE'] == '1':
-        image_segment(image_path=image_path, output_path=output_path,
-                      batch=batch, model_type=model_type)
+        image_segment(image_path=image_path, output_path=output_path)
     elif configs['SEGMENT_TYPE'] == '2':
         image_detection(image_path=image_path, output_path=output_path, text_prompt=text_prompt,
                         box_threshold=box_threshold, text_threshold=text_threshold)
     elif configs['SEGMENT_TYPE'] == '3':
-        image_segment_satellite_img(image_path=image_path, output_path=output_path,
-                                    batch=batch, model_type=model_type)
+        image_segment_satellite_img(image_path=image_path, output_path=output_path)
     elif configs['SEGMENT_TYPE'] == '4':
-        image_segment_drone(image_path=image_path, output_path=output_path,
-                            batch=batch, model_type=model_type)
+        image_segment_drone(image_path=image_path, output_path=output_path)
     else:
         print('request SEGMENT_TYPE')
 # main.py
