@@ -9,26 +9,70 @@ class env_data:
         load_dotenv(env_path)
         self.configs = os.environ
 
+    def get_config(self):
+        return self.configs
+    
+    #get image path
+    def get_image_path(self):
+        return self.configs["IMAGE_PATH"]
+    #get output path
+    def get_output_path(self):
+        return self.configs["OUTPUT_PATH"]
+    #get output extension
+    def get_output_extension(self):
+        return self.configs["OUTPUT_EXTENSION_TYPE"]
+    def get_min_polygon_area(self):
+        return int(self.configs["MIN_POLYGON_AREA"])
+
+
+
+
     def get_model(self):
         return self.configs["MODEL"]
-
     def get_model_type(self):
         return self.configs["MODEL_TYPE"]
-
     def get_checkpoint(self):
         return self.configs["MODEL_CHECKPOINT"]
-
     def get_batch(self):
         return ast.literal_eval(self.configs["BATCH"])
 
+
+    def get_text_prompt(self):
+        return self.configs["TEXT_PROMPT"]
+    # get box_threshold
+    def get_box_threshold(self):
+        return float(self.configs["BOX_THRESHOLD"])
+    # get text_threshold
+    def get_text_threshold(self):
+        return float(self.configs["TEXT_THRESHOLD"])
+    
+
+
     def get_imageresize(self):
         return int(self.configs["IMAGE_RESIZE"])
+    #get quality
+    def get_quality(self):
+        return int(self.configs["QUALITY"])
+    #get brightscale
+    def get_brightscale(self):
+        try:
+            return float(self.configs["BRIGHTSCALE"])
+        except:
+            return ast.literal_eval(self.configs["BRIGHTSCALE"])
 
-    def get_output_extension(self):
-        return self.configs["OUTPUT_EXTENSION_TYPE"]
+    #get blur_image
+    def get_blur_image(self):
+        return ast.literal_eval(self.configs["BLUR_IMAGE"])
+    #get hsv_image
+    def get_hsv_image(self):
+        return ast.literal_eval(self.configs["HSV_IMAGE"])
+    #get gray_image
+    def get_gray_image(self):
+        return ast.literal_eval(self.configs["GRAY_IMAGE"])
+    
 
-    def get_min_polygon_area(self):
-        return int(self.configs["MIN_POLYGON_AREA"])
+
+
 
     def get_samkwargs(self):
         if ast.literal_eval(self.configs["SAM_KWARGS"]) == True :

@@ -8,21 +8,20 @@ from resize_image import resize_image_scale
 
 
 from env_data import env_data
-import ast
 configs = env_data()
 
 
 def filter_image(image_path):
     filter_use = False
-    brightscale = float(configs['BRIGHT'])
-    quality = int(configs['QUALITY'])
-    blur_image = ast.literal_eval(configs['BLUR_IMAGE'])
-    hsv_image = ast.literal_eval(configs['HSV_IMAGE'])
-    gray_image = ast.literal_eval(configs['GRAY_IMAGE'])
-    output_path = configs['OUTPUT_PATH']
+    brightscale = configs.get_brightscale()
+    quality = configs.get_quality()
+    blur_image = configs.get_blur_image()
+    hsv_image = configs.get_hsv_image()
+    gray_image = configs.get_gray_image()
+    output_path =  configs.get_output_path()
 
     image = imagefilter(image_path)
-    if brightscale != 1:
+    if  brightscale != False:
         print('brightscale')
         image.bright_image(brightscale)
         filter_use = True
@@ -158,13 +157,13 @@ def image_segment_drone(image_path, output_path='segment_output'):
 
 if __name__ == '__main__':
 
-    image_path = configs['IMAGE_PATH']
-    output_path = configs['OUTPUT_PATH']
+    image_path = configs.get_image_path()
+    output_path = configs.get_output_path()
 
 
-    text_prompt = configs['TEXT_PROMPT']
-    box_threshold = float(configs['BOX_THRESHOLD'])
-    text_threshold = float(configs['TEXT_THRESHOLD'])
+    text_prompt = configs.get_text_prompt()
+    box_threshold = configs.get_box_threshold()
+    text_threshold = configs.get_text_threshold()
 
     if configs['SEGMENT_TYPE'] == '1':
         image_segment(image_path=image_path, output_path=output_path)
