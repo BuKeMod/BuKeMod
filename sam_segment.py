@@ -20,7 +20,7 @@ def segment(image, output_path='segment_output', filename=None):
    
 
 
-    sam = create_sam(env_data.get_model())
+    sam = create_sam(envdata.get_model())
         
 
     filename = create_folder_from_imageformat(image,output_path,filename)
@@ -45,7 +45,7 @@ def segment(image, output_path='segment_output', filename=None):
 def segment_drone(image_path,image_resize, output_path='segment_output', filename=None,imgtype='None'):
     print('segment_drone')
 
-    sam = create_sam(env_data.get_model())
+    sam = create_sam(envdata.get_model())
         
 
     filename = create_folder_from_imageformat(image_path,output_path,filename)
