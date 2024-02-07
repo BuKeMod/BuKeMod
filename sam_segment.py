@@ -1,5 +1,3 @@
-
-from samgeo import SamGeo
 import numpy
 from filefolder_manage import create_folder,folder_to_zip
 import os
