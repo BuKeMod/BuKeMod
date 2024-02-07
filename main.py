@@ -156,23 +156,22 @@ def image_segment_drone(image_path, output_path='segment_output'):
 
 
 if __name__ == '__main__':
-
+    segment_type = configs.get_segment_type()
     image_path = configs.get_image_path()
     output_path = configs.get_output_path()
-
 
     text_prompt = configs.get_text_prompt()
     box_threshold = configs.get_box_threshold()
     text_threshold = configs.get_text_threshold()
 
-    if configs['SEGMENT_TYPE'] == '1':
+    if segment_type == '1':
         image_segment(image_path=image_path, output_path=output_path)
-    elif configs['SEGMENT_TYPE'] == '2':
+    elif segment_type == '2':
         image_detection(image_path=image_path, output_path=output_path, text_prompt=text_prompt,
                         box_threshold=box_threshold, text_threshold=text_threshold)
-    elif configs['SEGMENT_TYPE'] == '3':
+    elif segment_type == '3':
         image_segment_satellite_img(image_path=image_path, output_path=output_path)
-    elif configs['SEGMENT_TYPE'] == '4':
+    elif segment_type == '4':
         image_segment_drone(image_path=image_path, output_path=output_path)
     else:
         print('request SEGMENT_TYPE')

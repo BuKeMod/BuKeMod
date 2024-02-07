@@ -11,6 +11,9 @@ class env_data:
 
     def get_config(self):
         return self.configs
+    #get segment type
+    def get_segment_type(self):
+        return self.configs["SEGMENT_TYPE"]
     
     #get image path
     def get_image_path(self):
