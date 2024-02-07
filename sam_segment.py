@@ -32,7 +32,7 @@ def segment(image, output_path='segment_output', filename=None):
 
    
     sam.generate(
-        image, mask, batch=eval(batch), foreground=True, erosion_kernel=(3, 3), mask_multiplier=255,
+        image, mask, batch=batch, foreground=True, erosion_kernel=(3, 3), mask_multiplier=255,
         # sam_kwargs=sam_kwargs
     )
 
@@ -55,7 +55,7 @@ def segment_drone(image_path,image_resize, output_path='segment_output', filenam
     shapefile = f'{output_path}/{filename}/{filename}_segment_{file_extension}_file.{file_extension}'
 
     sam.generate(
-        image_resize, mask, batch=eval(batch), foreground=True, erosion_kernel=(3, 3), mask_multiplier=255,
+        image_resize, mask, batch=batch, foreground=True, erosion_kernel=(3, 3), mask_multiplier=255,
         # sam_kwargs=sam_kwargs
     )
 
