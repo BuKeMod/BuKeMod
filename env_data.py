@@ -59,9 +59,9 @@ class env_data:
     #get brightscale
     def get_brightscale(self):
         try:
-            return float(self.configs["BRIGHTSCALE"])
+            return float(self.configs["BRIGHT"])
         except:
-            return ast.literal_eval(self.configs["BRIGHTSCALE"])
+            return ast.literal_eval(self.configs["BRIGHT"])
 
     #get blur_image
     def get_blur_image(self):
