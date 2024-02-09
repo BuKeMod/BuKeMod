@@ -74,5 +74,3 @@ def folder_to_zip(output_path='fiteroutput', zipname='output_zip'):
         print('folder_to_zip ', e)
 
 
-# if __name__ == '__main__':
-#     copy_img('img\Task-of-2023-12-19T112104744Z-orthophoto.tif','2.tif')

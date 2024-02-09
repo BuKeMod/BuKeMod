@@ -59,7 +59,7 @@ def segment_drone(image_path,image_resize, output_path='segment_output', filenam
 
 
     image_tiff = resizeimgae_check(image_path,image_resize,mask)
-    
+
     raster_to_vector(image_tiff,shapefile,area_threshold)
     
    
