@@ -69,7 +69,7 @@ def resizeimgae_check(image_path,image_resize,mask):
     if image_path != image_resize:
         from resize_image import restore_original_size
         imagepath_restore = restore_original_size(image_path, mask)
-
+        
         from image_to_image import image_to_tif
         from filefolder_manage import getfilename,getdirpath
 

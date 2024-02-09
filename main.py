@@ -71,7 +71,7 @@ def image_segment(image_path, output_path='segment_output'):
         segment(image, output_path)
 
         print(f"{getfilename(image)} segment success")
-    folder_to_zip(f'{output_path}', 'segment_output')
+    folder_to_zip(f'{output_path}', f'{getfilename(output_path)}')
 
 
 def image_detection(image_path, output_path='detection_output', text_prompt='', box_threshold=0.2, text_threshold=0.2):
@@ -101,7 +101,7 @@ def image_detection(image_path, output_path='detection_output', text_prompt='', 
 
         print(f"{getfilename(image)}  detection success")
 
-    folder_to_zip(f'{output_path}', 'segment_output')
+    folder_to_zip(f'{output_path}', f'{getfilename(output_path)}')
 
 
 def image_segment_satellite_img(image_path, output_path='segment_output'):
@@ -130,7 +130,7 @@ def image_segment_satellite_img(image_path, output_path='segment_output'):
         segment(image, output_path)
         print(f"{getfilename(image)} satellite segment success")
 
-    folder_to_zip(f'{output_path}', 'segment_output')
+    folder_to_zip(f'{output_path}', f'{getfilename(output_path)}')
 
 
 def image_segment_drone(image_path, output_path='segment_output'):
@@ -153,7 +153,7 @@ def image_segment_drone(image_path, output_path='segment_output'):
         segment_drone(image_path, image_resize, output_path
                        )
         print(f"{getfilename(image)} drone segment success")
-    folder_to_zip(f'{output_path}', 'segment_output')
+    folder_to_zip(f'{output_path}', f'{getfilename(output_path)}')
 
 
 if __name__ == '__main__':
