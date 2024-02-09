@@ -58,22 +58,27 @@ def segment_drone(image_path,image_resize, output_path='segment_output', filenam
     )
 
 
-    from resize_image import restore_original_size
-    imagepath_restore = restore_original_size(image_path, mask)
-
-    from image_to_image import image_to_tif
-    from filefolder_manage import getfilename,getdirpath
-
- 
-
-    image_tiff = image_to_tif(image=imagepath_restore, source=image_path, output_path=getdirpath(imagepath_restore), output_name=getfilename(imagepath_restore))
-
-
+    image_tiff = resizeimgae_check(image_path,image_resize,mask)
+    
     raster_to_vector(image_tiff,shapefile,area_threshold)
     
    
 
     # sam.show_masks(cmap="binary_r")
+def resizeimgae_check(image_path,image_resize,mask):    
+    if image_path != image_resize:
+        from resize_image import restore_original_size
+        imagepath_restore = restore_original_size(image_path, mask)
+
+        from image_to_image import image_to_tif
+        from filefolder_manage import getfilename,getdirpath
+
+        image_tiff = image_to_tif(image=imagepath_restore, source=image_path, output_path=getdirpath(imagepath_restore), output_name=getfilename(imagepath_restore))
+        return image_tiff
+    else:
+        return mask
+    
+
 
 
 def create_sam(sam_type):
@@ -114,7 +119,7 @@ def create_folder_from_imageformat(image,output_path,filename):
 
 
 
-def raster_to_vector(source, output, simplify_tolerance=None, dst_crs=None, area_threshold=1000, **kwargs):
+def raster_to_vector(source, output,area_threshold=100, simplify_tolerance=None, dst_crs=None,  **kwargs):
 
     from rasterio import features
 

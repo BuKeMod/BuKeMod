@@ -29,7 +29,8 @@ def resize_image_scale(input_path,output_path):
     # Check if either dimension is smaller than 1000
     if original_width < target_size or original_height < target_size:
         # If either dimension is smaller than 1000, do not resize
-        new_width, new_height = original_width, original_height
+        return input_path
+        # new_width, new_height = original_width, original_height
     else:
         # Calculate scale factor based on the smaller dimension
         scale_factor = calculate_scale_factor(original_width, original_height, target_size)

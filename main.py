@@ -143,6 +143,7 @@ def image_segment_drone(image_path, output_path='segment_output'):
 
             image = filter_image(image_filter)
             image_resize = resize_image_scale(image, output_path)
+            
             segment_drone(image_path, image_resize, output_path
                           )
             print(f"{getfilename(image)} drone segment success")
