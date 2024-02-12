@@ -10,7 +10,6 @@ class imagefilter:
         self.file_path = file_path
         self.directory, self.filename = os.path.split(file_path)
         self.filenamesplit =  os.path.splitext(self.filename)[0]
-        
         self.image = cv2.imread(file_path, cv2.IMREAD_UNCHANGED)
     def get_filepath(self):
         return self.file_path
