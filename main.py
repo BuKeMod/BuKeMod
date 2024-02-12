@@ -3,7 +3,7 @@ from filefolder_manage import setimagepath, folder_to_zip, getfilename
 from geotiff_utility import processimagetif
 from sam_segment import segment, segment_drone
 from sam_object_detection import detection
-from argumentParser import create_parser
+
 from resize_image import resize_image_scale
 
 
