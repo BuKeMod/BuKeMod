@@ -53,6 +53,7 @@ def restore_original_size(original_path, resized_path):
     dir = getdirpath(resized_path)
     filename = getfilename(resized_path)
     # Open the original image
+
     original_image = Image.open(original_path)
 
     # Open the resized image
