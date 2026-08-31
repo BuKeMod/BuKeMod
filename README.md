@@ -45,15 +45,15 @@ I enjoy building backend systems, APIs and solving complicated business logic.
   <picture>
     <source
       media="(prefers-color-scheme: dark)"
-      srcset="https://raw.githubusercontent.com/BuKeMod/BuKeMod/output/github-contribution-grid-snake-dark.svg"
+      srcset="https://raw.githubusercontent.com/BuKeMod/BuKeMod/gh-pages/github-contribution-grid-snake-dark.svg"
     />
     <source
       media="(prefers-color-scheme: light)"
-      srcset="https://raw.githubusercontent.com/BuKeMod/BuKeMod/output/github-contribution-grid-snake.svg"
+      srcset="https://raw.githubusercontent.com/BuKeMod/BuKeMod/gh-pages/github-contribution-grid-snake.svg"
     />
     <img
       alt="github contribution snake"
-      src="https://raw.githubusercontent.com/BuKeMod/BuKeMod/output/github-contribution-grid-snake.svg"
+      src="https://raw.githubusercontent.com/BuKeMod/BuKeMod/gh-pages/github-contribution-grid-snake.svg"
     />
   </picture>
 </p>
