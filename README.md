@@ -1,16 +1,63 @@
-## Hi there 👋
+<h1 align="center">Hi 👋, I'm BuKeMod</h1>
 
-<!--
-**BuKeMod/BuKeMod** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+<h3 align="center">
+Backend Developer • System Architecture • Warehouse & E-Commerce
+</h3>
 
-Here are some ideas to get you started:
+<p align="center">
+I enjoy building backend systems, APIs and solving complicated business logic.
+</p>
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+---
+
+### 👨‍💻 About Me
+
+- 🔭 Building **Warehouse / POS / E-Commerce systems**
+- 🧠 Interested in **Backend Architecture & System Design**
+- ⚡ Working with **Node.js, Express, Prisma, MySQL & Redis**
+- 🐳 Deploying with **Docker, Nginx & Linux**
+- 🤖 Exploring **AI-assisted software development**
+
+---
+
+### 🛠 Tech Stack
+
+<p align="left">
+
+<img src="https://skillicons.dev/icons?i=nodejs,express,js,ts,mysql,redis,prisma,docker,nginx,linux,git,github" />
+
+</p>
+
+---
+
+### 📊 GitHub Stats
+
+<p align="center">
+
+<img
+  src="https://github-readme-stats.vercel.app/api?username=BuKeMod&show_icons=true&theme=github_dark"
+/>
+
+</p>
+
+<p align="center">
+
+<img
+  src="https://github-readme-streak-stats.herokuapp.com/?user=BuKeMod&theme=github-dark-blue"
+/>
+
+</p>
+
+---
+
+### 📈 Contribution Graph
+
+<img
+src="https://github-readme-activity-graph.vercel.app/graph?username=BuKeMod&theme=github-compact"
+/>
+
+---
+
+<p align="center">
+  <i>Build → Break → Learn → Improve 🚀</i>
+</p>
