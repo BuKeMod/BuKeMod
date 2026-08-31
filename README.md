@@ -52,9 +52,12 @@ I enjoy building backend systems, APIs and solving complicated business logic.
 
 ### 📈 Contribution Graph
 
-<img
-src="https://github-readme-activity-graph.vercel.app/graph?username=BuKeMod&theme=github-compact"
-/>
+<p align="center">
+  <img
+    src="https://github-readme-activity-graph.vercel.app/graph?username=BuKeMod&theme=github-dark&hide_border=true"
+    width="100%"
+  />
+</p>
 
 ---
 
