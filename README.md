@@ -54,10 +54,10 @@ I enjoy building backend systems, APIs and solving complicated business logic.
     <img
       alt="github contribution snake"
       src="https://raw.githubusercontent.com/BuKeMod/BuKeMod/gh-pages/github-contribution-grid-snake.svg"
+      width="100%"
     />
   </picture>
 </p>
-
 ---
 
 <p align="center">
