@@ -32,10 +32,6 @@ I enjoy building backend systems, APIs and solving complicated business logic.
 ## 📊 GitHub Stats
 
 <p align="center">
-  <img
-    src="https://github-readme-stats.vercel.app/api?username=BuKeMod&show_icons=true&theme=github_dark&hide_border=true"
-    height="165"
-  />
 
   <img
     src="https://github-readme-streak-stats.herokuapp.com/?user=BuKeMod&theme=github-dark-blue&hide_border=true"
@@ -43,10 +39,23 @@ I enjoy building backend systems, APIs and solving complicated business logic.
   />
 </p>
 
-## 🐍 Contributions
+## 🐍 Contribution Snake
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/BuKeMod/BuKeMod/output/github-contribution-grid-snake-dark.svg" />
+  <picture>
+    <source
+      media="(prefers-color-scheme: dark)"
+      srcset="https://raw.githubusercontent.com/BuKeMod/BuKeMod/output/github-contribution-grid-snake-dark.svg"
+    />
+    <source
+      media="(prefers-color-scheme: light)"
+      srcset="https://raw.githubusercontent.com/BuKeMod/BuKeMod/output/github-contribution-grid-snake.svg"
+    />
+    <img
+      alt="github contribution snake"
+      src="https://raw.githubusercontent.com/BuKeMod/BuKeMod/output/github-contribution-grid-snake.svg"
+    />
+  </picture>
 </p>
 
 ---
